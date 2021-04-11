@@ -79,6 +79,10 @@
       "allowedCategories": [ "production" ]
     },
     {
+      "name": "cors",
+      "allowedCategories": [ "tools" ]
+    },
+    {
       "name": "eslint",
       "allowedCategories": [ "production" ]
     },
@@ -101,6 +105,10 @@
     {
       "name": "eslint-plugin-standard",
       "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "express",
+      "allowedCategories": [ "tools" ]
     },
     {
       "name": "extract-domain",
@@ -177,6 +185,10 @@
     {
       "name": "redis",
       "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "request",
+      "allowedCategories": [ "tools" ]
     },
     {
       "name": "rxjs",

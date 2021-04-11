@@ -20,6 +20,7 @@
         "@rush-temp/babelelibrary": "file:./projects/babelelibrary.tgz",
         "@rush-temp/classifier": "file:./projects/classifier.tgz",
         "@rush-temp/client": "file:./projects/client.tgz",
+        "@rush-temp/proxy": "file:./projects/proxy.tgz",
         "@testing-library/jest-dom": "^5.11.10",
         "@testing-library/react": "^11.2.6",
         "@testing-library/user-event": "^12.8.3",
@@ -44,12 +45,14 @@
         "babel-jest": "^26.0.1",
         "better-sqlite3": "^7.1.4",
         "concurrently": "^5.2.0",
+        "cors": "^2.8.5",
         "eslint": "^6.8.0",
         "eslint-config-standard": "^14.1.1",
         "eslint-plugin-import": "^2.20.2",
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-standard": "^4.0.1",
+        "express": "^4.17.1",
         "extract-domain": "^2.2.1",
         "fast-xml-parser": "^3.18.0",
         "form-data": "^3.0.1",
@@ -69,6 +72,7 @@
         "react-scripts": "4.0.3",
         "recoil": "^0.2.0",
         "redis": "^3.0.2",
+        "request": "^2.88.2",
         "rxjs": "^6.6.6",
         "stopword": "^1.0.1",
         "styled-components": "^5.1.1",
@@ -2508,6 +2512,16 @@
         "styled-components": "^5.1.1",
         "typescript": "^4.2.3",
         "web-vitals": "^1.1.1"
+      }
+    },
+    "node_modules/@rush-temp/proxy": {
+      "version": "0.0.0",
+      "resolved": "file:projects/proxy.tgz",
+      "integrity": "sha512-9465qxkipNZSOQF/tti9IqnpT1aenq98h6nTJ2XCeFVM2w6rs7IjC7lrMsygotIzY7QIqAkEQDI1Bn5Zgt64hg==",
+      "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "request": "^2.88.2"
       }
     },
     "node_modules/@sinonjs/commons": {
@@ -6346,6 +6360,18 @@
       "version": "1.0.2",
       "resolved": "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.2.tgz",
       "integrity": "sha1-tf1UIgqivFq1eqtxQMlAdUUDwac="
+    },
+    "node_modules/cors": {
+      "version": "2.8.5",
+      "resolved": "https://registry.npmjs.org/cors/-/cors-2.8.5.tgz",
+      "integrity": "sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==",
+      "dependencies": {
+        "object-assign": "^4",
+        "vary": "^1"
+      },
+      "engines": {
+        "node": ">= 0.10"
+      }
     },
     "node_modules/cosmiconfig": {
       "version": "7.0.0",
@@ -25045,6 +25071,15 @@
         "web-vitals": "^1.1.1"
       }
     },
+    "@rush-temp/proxy": {
+      "version": "file:projects/proxy.tgz",
+      "integrity": "sha512-9465qxkipNZSOQF/tti9IqnpT1aenq98h6nTJ2XCeFVM2w6rs7IjC7lrMsygotIzY7QIqAkEQDI1Bn5Zgt64hg==",
+      "requires": {
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "request": "^2.88.2"
+      }
+    },
     "@sinonjs/commons": {
       "version": "1.8.3",
       "resolved": "https://registry.npmjs.org/@sinonjs/commons/-/commons-1.8.3.tgz",
@@ -28134,6 +28169,15 @@
       "version": "1.0.2",
       "resolved": "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.2.tgz",
       "integrity": "sha1-tf1UIgqivFq1eqtxQMlAdUUDwac="
+    },
+    "cors": {
+      "version": "2.8.5",
+      "resolved": "https://registry.npmjs.org/cors/-/cors-2.8.5.tgz",
+      "integrity": "sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==",
+      "requires": {
+        "object-assign": "^4",
+        "vary": "^1"
+      }
     },
     "cosmiconfig": {
       "version": "7.0.0",

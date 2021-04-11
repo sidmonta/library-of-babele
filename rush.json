@@ -474,6 +474,12 @@
       "projectFolder": "babele/client",
       "reviewCategory": "production",
       "shouldPublish": false
+    },
+    {
+      "packageName": "proxy",
+      "projectFolder": "tools/Proxy",
+      "reviewCategory": "tools",
+      "shouldPublish": false
     }
   ]
 }
