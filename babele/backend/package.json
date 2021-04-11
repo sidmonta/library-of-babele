@@ -1,0 +1,42 @@
+{
+  "name": "babelebackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-redis": "redis-server /opt/homebrew/etc/redis.conf",
+    "start-server": "ts-node server.ts",
+    "start": "concurrently \"npm:start-*\"",
+    "dev": "concurrently \"npm:start-redis\" \"ts-node-dev server.ts\""
+  },
+  "keywords": [],
+  "author": "Sidmonta <sidmonta.15@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@marblejs/core": "^3.2.0",
+    "@marblejs/messaging": "^3.2.1",
+    "@marblejs/middleware-body": "^3.2.0",
+    "@marblejs/middleware-cors": "^3.2.0",
+    "@marblejs/middleware-logger": "^3.2.0",
+    "@marblejs/websockets": "^3.2.0",
+    "@sidmonta/babelecrawler": "0.0.3",
+    "@sidmonta/babelelibrary": "0.0.10",
+    "@sidmonta/classifier": "0.0.3",
+    "better-sqlite3": "^7.1.4",
+    "fp-ts": "^2.6.5",
+    "mime-types": "^2.1.27",
+    "n3": "^1.8.1",
+    "redis": "^3.0.2",
+    "rxjs": "^6.6.6"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^5.4.0",
+    "@types/mime-types": "^2.1.0",
+    "@types/n3": "^1.1.6",
+    "@types/redis": "^2.8.22",
+    "concurrently": "^5.2.0",
+    "ts-node": "^9.1.1",
+    "ts-node-dev": "^1.0.0-pre.56",
+    "typescript": "^4.2.3"
+  }
+}

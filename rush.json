@@ -442,8 +442,38 @@
     {
       "packageName": "@sidmonta/babelelibrary",
       "projectFolder": "tools/BabeleLibrary",
-      "reviewCategory": "tools",
+      "reviewCategory": "libraries",
       "shouldPublish": true
+    },
+    {
+      "packageName": "@sidmonta/babelelabeler",
+      "projectFolder": "tools/BabeleLabeler",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@sidmonta/babelecrawler",
+      "projectFolder": "tools/BabeleCrawler",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@sidmonta/classifier",
+      "projectFolder": "tools/Classifier",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "babelebackend",
+      "projectFolder": "babele/backend",
+      "reviewCategory": "production",
+      "shouldPublish": false
+    },
+    {
+      "packageName": "client",
+      "projectFolder": "babele/client",
+      "reviewCategory": "production",
+      "shouldPublish": false
     }
   ]
 }

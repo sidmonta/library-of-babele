@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chilanka&display=swap');
+
+footer { grid-area: footer; height: 0; }
+header { grid-area: header; }
+main { grid-area: content; display: flex;}
+
+:root {
+    --main-bg-color: aqua;
+    --main-text-color: #151515;
+}
+
+.App {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--main-bg-color);
+    min-height: 100vh;
+    min-width: 100vw;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0 2.8fr 0;
+    gap: 1px 1px;
+    grid-template-areas: "header" "content" "footer";
+}
+
+.menu .hamburger-btn {
+    position: absolute;
+    margin: 25px;
+    left: 1em;
+    z-index: 999;
+}
+
+footer .searchBtn {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    margin: 0 15px;
+}
+
+.bookcase-container {
+    margin-top: 5%;
+}
+
+.spin {
+    animation-name: 'spin';
+    animation-duration: 5000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+.masonry {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.masonry li {
+    margin: 10px 0;
+    width: 150px;
+    height: 200px;
+}
+
+.book-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    margin: 3%;
+    background-color: antiquewhite;
+    z-index: 999;
+}

@@ -1,0 +1,222 @@
+// DO NOT ADD COMMENTS IN THIS FILE.  They will be lost when the Rush tool resaves it.
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/approved-packages.schema.json",
+  "packages": [
+    {
+      "name": "@marblejs/core",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "@marblejs/messaging",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "@marblejs/middleware-body",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "@marblejs/middleware-cors",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "@marblejs/middleware-logger",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "@marblejs/websockets",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "@sidmonta/babelecrawler",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "@sidmonta/babelelabeler",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "@sidmonta/babelelibrary",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "@sidmonta/classifier",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "@testing-library/jest-dom",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "@testing-library/react",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "@testing-library/user-event",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "@typescript-eslint/eslint-plugin",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "@typescript-eslint/parser",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "axios",
+      "allowedCategories": [ "libraries", "tools" ]
+    },
+    {
+      "name": "babel-jest",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "better-sqlite3",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "concurrently",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "eslint",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "eslint-config-standard",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "eslint-plugin-import",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "eslint-plugin-node",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "eslint-plugin-promise",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "eslint-plugin-standard",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "extract-domain",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "fast-xml-parser",
+      "allowedCategories": [ "libraries", "tools" ]
+    },
+    {
+      "name": "form-data",
+      "allowedCategories": [ "libraries", "tools" ]
+    },
+    {
+      "name": "fp-ts",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "he",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "jest",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "mime-types",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "n3",
+      "allowedCategories": [ "libraries", "production", "tools" ]
+    },
+    {
+      "name": "node-ts",
+      "allowedCategories": [ "libraries", "tools" ]
+    },
+    {
+      "name": "node-typescript",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "ramda",
+      "allowedCategories": [ "libraries", "production", "tools" ]
+    },
+    {
+      "name": "rdfxml-streaming-parser",
+      "allowedCategories": [ "libraries", "tools" ]
+    },
+    {
+      "name": "react",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "react-dom",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "react-icons",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "react-router-dom",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "react-scripts",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "recoil",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "redis",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "rxjs",
+      "allowedCategories": [ "libraries", "production", "tools" ]
+    },
+    {
+      "name": "stopword",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "styled-components",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "ts-jest",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "ts-loader",
+      "allowedCategories": [ "libraries", "tools" ]
+    },
+    {
+      "name": "ts-node",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "ts-node-dev",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "ts-toolbelt",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "typescript",
+      "allowedCategories": [ "libraries", "production", "tools" ]
+    },
+    {
+      "name": "web-vitals",
+      "allowedCategories": [ "production" ]
+    }
+  ]
+}

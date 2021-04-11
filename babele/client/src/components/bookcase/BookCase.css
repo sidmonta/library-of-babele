@@ -1,0 +1,27 @@
+svg .line {
+    stroke: #000;
+    fill: aqua;
+}
+svg text {
+    font-family: Helvetica, serif;
+    font-weight: 100;
+    stroke-width: 1px;
+    font-size: 36px;
+}
+
+svg text.bookcase-name {
+    transform: rotate(90deg);
+}
+
+svg text.bookcase-dewey {
+    transform: skewY(50deg);
+    font-size: 10px;
+}
+
+.actionable {
+    cursor: pointer;
+}
+
+.actionable svg .line {
+    fill: aquamarine;
+}
