@@ -83,6 +83,10 @@
       "allowedCategories": [ "tools" ]
     },
     {
+      "name": "env-cmd",
+      "allowedCategories": [ "production" ]
+    },
+    {
       "name": "eslint",
       "allowedCategories": [ "production" ]
     },

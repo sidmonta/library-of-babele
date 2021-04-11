@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start-redis": "redis-server /opt/homebrew/etc/redis.conf",
-    "start-server": "ts-node server.ts",
-    "start": "concurrently \"npm:start-*\"",
-    "dev": "concurrently \"npm:start-redis\" \"ts-node-dev server.ts\""
+    "start-server": "env-cmd -f ../../.env.development.local ts-node server.ts",
+    "start": "concurrently \"npm:start-*\" &",
+    "dev": "concurrently \"npm:start-redis\" \"env-cmd -f ../../.env.development.local ts-node-dev server.ts\""
   },
   "keywords": [],
   "author": "Sidmonta <sidmonta.15@gmail.com>",
@@ -37,6 +37,7 @@
     "concurrently": "^5.2.0",
     "ts-node": "^9.1.1",
     "ts-node-dev": "^1.0.0-pre.56",
-    "typescript": "^4.2.3"
+    "typescript": "^4.2.3",
+    "env-cmd": "~10.1.0"
   }
 }
