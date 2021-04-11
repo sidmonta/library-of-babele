@@ -48,7 +48,7 @@ export const bookData$ = (event$: Observable<Event>) => {
     act((event: WSBookDataIn) => {
       return pipe(
         getBkData(event),
-        map((eventOutData: WSBookDataOut) =>
+        map((eventOutData: WSBookDataOut | never) =>
           reply(event)({
             type: eventOutData.type,
             payload: eventOutData.payload,

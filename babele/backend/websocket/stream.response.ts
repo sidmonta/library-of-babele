@@ -9,7 +9,7 @@ import {
 } from './EffectTypes'
 import { fromPromise } from 'rxjs/internal-compatibility'
 import { distinct, filter, map, mergeMap, switchMap, tap } from 'rxjs/operators'
-import { from, Observable, throwError } from 'rxjs'
+import {from, merge, Observable, throwError} from 'rxjs'
 import Crawler from '@sidmonta/babelecrawler'
 import classify from '@sidmonta/classifier/lib/stream'
 import { allitem, smembers } from '../cache/redis.wrapper'
@@ -107,8 +107,8 @@ export function getBookData(cache) {
       )
 
       // Merge of all different type of response
-      // return merge(bookData$, bookService$, newBookClassified$)
-      return [bookData$, bookService$, newBookClassified$]
+      return merge(bookData$, bookService$, newBookClassified$)
+      // return [bookData$, bookService$, newBookClassified$]
     }
     return throwError(new Error('No URI found for crawling'))
   }

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import Labeler, { __ } from '@sidmonta/babelelabeler/src'
+import Labeler, { __ } from '@sidmonta/babelelabeler'
 
 export const LabelerContext = createContext(Labeler)
 export const useLabelerContext = () => useContext(LabelerContext)
