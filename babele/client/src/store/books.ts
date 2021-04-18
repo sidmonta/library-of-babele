@@ -1,7 +1,7 @@
 import { fetchAPI } from '../services'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useWebSocket } from '../context/websocket'
-import { atom, selector, selectorFamily, useRecoilState } from 'recoil'
+import { atom, selectorFamily, useRecoilState } from 'recoil'
 
 type NewBook = {
   uri: string
@@ -48,7 +48,7 @@ export const useNewBookHook = (onNewBook: (book: NewBook, allNewBooks: NewBook[]
     })
 
     return () => wsClient.removeListener('NEWBOOK', identify)
-  }, [onNewBook])
+  }, [onNewBook, newBooks, setNewBook, wsClient])
 
   return newBooks
 }

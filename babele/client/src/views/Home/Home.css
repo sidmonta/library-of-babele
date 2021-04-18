@@ -1,0 +1,33 @@
+.home {
+  display: flex;
+  align-items: center;
+  margin-top: -5%;
+}
+
+.home .quotes {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 5%;
+}
+
+.home .quotes p {
+  width: 45%;
+  padding: 1em;
+  line-height: 2em;
+  font-style: italic;
+  font-size: 20px;
+  background: #717171;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  font-family: serif;
+}
+
+.home .quotes svg {
+  fill: var(--color-red);
+}
+
+.home .quotes svg.float-left {
+  align-self: flex-end;
+}
