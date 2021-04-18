@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import React  from 'react'
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import './App.css'
 import Home from './views/Home/Home'
 import CategoryPage from './views/CategoryPage/CategoryPage'
 
-import NavMenu from './components/menu/NavMenu'
+import NavMenu from './components/structure/menu/NavMenu'
 import SearchResult from './views/SearchResult/SearchResult'
-import SearchBar from './components/searchbar/SearchBar'
+import SearchBar from './components/structure/searchbar/SearchBar'
 import { ThemeContext, Themes } from './context/theme'
+import Title from "./components/common/title/title";
 
 const appTheme = process.env.REACT_APP_THEME as Themes
 
@@ -17,22 +18,25 @@ function App() {
       <div className="App">
         <Router>
           <header>
-            <NavMenu />
+            <Link to="/">
+              <Title>Babele's Library</Title>
+            </Link>
           </header>
           <main>
             <Switch>
-              <Route path="/">
-                <Home />
-              </Route>
-              <Route path="category/:categoryId">
+              <Route path="/category/:categoryId">
                 <CategoryPage />
               </Route>
-              <Route path="search/:query">
+              <Route path="/search/:query">
                 <SearchResult />
+              </Route>
+              <Route path="/">
+                <Home />
               </Route>
             </Switch>
           </main>
           <footer>
+            <NavMenu />
             <SearchBar />
           </footer>
         </Router>

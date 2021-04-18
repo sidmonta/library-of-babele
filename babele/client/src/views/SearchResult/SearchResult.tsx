@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
-import WoodBookcase from '../../components/woodbookcase/WoodBookcase'
-import BookList from '../../components/booklist/BookList'
+import WoodBookcase from '../../components/bookcaseComponents/woodbookcase/WoodBookcase'
+import BookList from '../../components/booksStackComponents/booklist/BookList'
 import { useWebSocket, useWSData } from '../../context/websocket'
 
 export default function SearchResult() {

@@ -1,8 +1,8 @@
-import { createContext, useContext, useEffect, useState } from 'react'
-import Labeler, { __ } from '@sidmonta/babelelabeler'
+import { useEffect, useState } from 'react'
+import { __ } from '@sidmonta/babelelabeler'
 
-export const LabelerContext = createContext(Labeler)
-export const useLabelerContext = () => useContext(LabelerContext)
+// export const LabelerContext = createContext(Labeler)
+// export const useLabelerContext = () => useContext(LabelerContext)
 
 export const useLabel = (uri: string, lang?: string | undefined) => {
   const [label, setLabel] = useState<string>(uri)

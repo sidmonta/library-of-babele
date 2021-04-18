@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import BookCase, { BookCaseType } from '../../components/bookcase/BookCase'
+import BookCase, { BookCaseType } from '../../components/bookcaseComponents/bookcase/BookCase'
 import styled from 'styled-components'
 
 const BookCasesContainer = styled.div`

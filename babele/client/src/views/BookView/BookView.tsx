@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import BookStack from '../../components/bookstack/BookStack'
+import BookStack from '../../components/booksStackComponents/bookstack/BookStack'
 
 export default function BookView() {
   const params: { bookUri: string } = useParams()
