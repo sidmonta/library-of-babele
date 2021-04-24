@@ -17,7 +17,7 @@ export default function AtomBook({ url }: { url: string }) {
   const BookCover = ThemeComponentFactory<{ color: string }>('bookComponents/book/AtomBook', <Fallback url={url} />)
 
   return (
-    <div onClick={() => routeTo(url)}>
+    <div onClick={() => routeTo(url)} className="wid100">
       <BookCover color={generateColorFromString(url)}>{he.decode(label)}</BookCover>
     </div>
   )

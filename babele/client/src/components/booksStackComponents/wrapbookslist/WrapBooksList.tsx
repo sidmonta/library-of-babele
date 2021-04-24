@@ -17,7 +17,6 @@ export default function WrapBookList({ deweySelect }: { deweySelect: DeweyCatego
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deweyId])
-
   return (
     <div>
       <BookList books={books} />

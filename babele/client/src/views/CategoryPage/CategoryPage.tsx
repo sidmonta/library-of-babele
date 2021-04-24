@@ -22,7 +22,7 @@ export default function CategoryPage() {
           <Breadcrumbs dewey={selectDewey} />
           <WoodBookcase title={selectDewey?.name || ''}>
             <div className="wood-book">
-              {/*<WrapBookList deweySelect={selectDewey} />*/}
+              <WrapBookList deweySelect={selectDewey} />
             </div>
           </WoodBookcase>
         </Route>

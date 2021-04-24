@@ -5,47 +5,52 @@ import { AiFillHome } from 'react-icons/ai'
 import styled from 'styled-components'
 
 const Item = styled.li`
-  display: inline;
+  display: inline-block;
 
-  span {
+  a {
     display: block;
     float: left;
-    height: 40px;
-    background: #f3f5fa;
 
-    text-align: center;
-    padding: 20px 10px 0 50px;
-    position: relative;
-    margin: 0 10px 0 0;
 
-    font-size: 18px;
-    text-decoration: none;
-
-    &:after {
-      content: '';
-      border-top: 30px solid transparent;
-      border-bottom: 30px solid transparent;
-      border-left: 30px solid #f3f5fa;
-      position: absolute;
-      right: -30px;
-      top: 0;
-      z-index: 1;
+    &:focus {
+      outline: thin dotted;
     }
-    &:before {
-      content: '';
-      border-top: 30px solid transparent;
-      border-bottom: 30px solid transparent;
-      border-left: 30px solid var(--main-bg-color);
-      position: absolute;
-      left: 0;
-      top: 0;
+
+    &:link {
+      touch-action: manipulation;
+      color: #007c89;
+      &:hover {
+        background-image: linear-gradient(currentColor, currentColor);
+        background-size: auto 1px;
+        background-repeat: repeat-x;
+        background-position: 0 calc(50% + 1ex);
+      }
     }
+
+    &:active,
+    &:hover {
+      outline: 0;
+    }
+
+    &:visited:not([rel=external]) {
+      color: currentColor;
+    }
+  }
+
+  &:nth-last-child(n+2):after {
+    display: inline-block;
+    content: "​";
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23767676' stroke-width='2' stroke-linecap='round' stroke-linejoin='round%5C'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E") center/16px 16px no-repeat;
+    width: 16px;
+    margin: 0 8px;
   }
 `
 
 const List = styled.ul`
   list-style: none;
-  display: inline-table;
+  display: flex;
+  padding-left: 0;
+  margin: 1em 0;
 `
 
 type BreadcrumbsProps = {
@@ -55,9 +60,7 @@ type BreadcrumbsProps = {
 const printHierarchy = (dewey: DeweyCategory) => {
   return dewey.hierarchy.map((d) => (
     <Item key={d.dewey}>
-      <span>
-        <Link to={'/category/' + d.dewey}>{d.name}</Link>
-      </span>
+      <Link to={'/category/' + d.dewey}><span>{d.name}</span></Link>
     </Item>
   ))
 }
@@ -68,18 +71,14 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
     return <span>No dewey</span>
   }
   return (
-    <List>
-      <Item>
-        <span>
+      <List>
+        <Item>
           <Link to="/">
             <AiFillHome />
           </Link>
-        </span>
-      </Item>
-      {printHierarchy(dewey)}
-      <Item>
-        <span>{dewey.name}</span>
-      </Item>
-    </List>
+        </Item>
+        {printHierarchy(dewey)}
+        <Item><span>{dewey.name}</span></Item>
+      </List>
   )
 }

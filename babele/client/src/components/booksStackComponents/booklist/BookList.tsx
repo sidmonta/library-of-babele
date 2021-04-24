@@ -23,15 +23,14 @@ const BookList = ({ books }: { books: string[] }) => {
         list: getBookForPage(books, 1),
       })
     }
-  }, [books, bookForPage, setBookForPage])
+  }, [books])
 
   useEffect(() => {
     const otherBook = getBookForPage(books, page)
-    console.log('load more')
     setBookForPage({
       list: bookForPage.list.concat(otherBook),
     })
-  }, [books, page, bookForPage, setBookForPage])
+  }, [page])
 
   return (
     <div>
@@ -42,9 +41,12 @@ const BookList = ({ books }: { books: string[] }) => {
           </li>
         ))}
       </ul>
-      <div className="loading" ref={loader} onClick={handleObserver}>
-        Load More
-      </div>
+      {
+        books.length - bookForPage.list.length > 0 &&
+        <div className="loading" ref={loader} onClick={handleObserver}>
+          Load More {books.length - bookForPage.list.length} books
+        </div>
+      }
     </div>
   )
 }

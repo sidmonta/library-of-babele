@@ -18,7 +18,7 @@ main { grid-area: content; display: flex;}
 
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 10% 1fr 0;
+    grid-template-rows: 150px 1fr 0;
     gap: 1px 1px;
     grid-template-areas: "header" "content" "footer";
 }
@@ -56,15 +56,6 @@ footer .searchBtn {
     animation-timing-function: linear;
 }
 
-@keyframes spin {
-    from {
-        transform:rotate(0deg);
-    }
-    to {
-        transform:rotate(360deg);
-    }
-}
-
 .masonry {
     display: flex;
     flex-wrap: wrap;
@@ -72,7 +63,7 @@ footer .searchBtn {
 }
 
 .masonry li {
-    margin: 10px 0;
+    margin: 10px -20px;
     width: 150px;
     height: 200px;
 }
@@ -91,4 +82,32 @@ footer .searchBtn {
 
 .bg-overlay {
   background-color: #fcfcfc80;
+}
+
+.wid100 {
+  width: 100%;
+  height: 100%;
+}
+
+/* ANIMATIONS */
+
+@keyframes spin {
+  from {
+    transform:rotate(0deg);
+  }
+  to {
+    transform:rotate(360deg);
+  }
+}
+
+@keyframes title-animations {
+  0% {
+    background-size: 160%;
+  }
+  50% {
+    background-size: 70%;
+  }
+  100% {
+    background-size: 30%;
+  }
 }
