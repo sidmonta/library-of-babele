@@ -9,7 +9,7 @@ import {
 } from './EffectTypes'
 import { fromPromise } from 'rxjs/internal-compatibility'
 import { distinct, filter, map, mergeMap, switchMap, tap } from 'rxjs/operators'
-import {from, merge, Observable, throwError} from 'rxjs'
+import {from, merge, Observable, of, throwError} from 'rxjs'
 import Crawler from '@sidmonta/babelecrawler'
 import classify from '@sidmonta/classifier/lib/stream'
 import { allitem, smembers } from '../cache/redis.wrapper'
@@ -69,7 +69,6 @@ export function getBookData(cache) {
     if (payload.uri) {
       const uri: string = payload.uri
       const crawler = new Crawler()
-      crawler.run(uri)
 
       const generateType = (t) => `${t}_${uri}`
 
@@ -82,6 +81,11 @@ export function getBookData(cache) {
       const bookService$: Observable<WSBookDataService> = crawler
         .getNewSourceStream()
         .pipe(map((service: string) => ({ type: generateType(Type.BOOKDATASERVICE), payload: { service } })))
+
+      let firstService = {}
+      bookService$.subscribe(service => {
+        firstService = service
+      })
 
       // Stream of new book classified
       const newBookClassified$: Observable<WSNewBookClassified> = crawler.getNewNodeStream().pipe(
@@ -106,8 +110,10 @@ export function getBookData(cache) {
         })
       )
 
+      crawler.run(uri)
+
       // Merge of all different type of response
-      return merge(bookData$, bookService$, newBookClassified$)
+      return merge(of(firstService), bookService$, bookData$, newBookClassified$)
       // return [bookData$, bookService$, newBookClassified$]
     }
     return throwError(new Error('No URI found for crawling'))
