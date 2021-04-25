@@ -28,9 +28,9 @@ interface Quad {
  * @constant
  */
 const labelUris: URI[] = [
-  'http://www.w3.org/2000/01/rdf-schema#label', // Label di default per RDF
   'http://purl.org/dc/terms/title', // Titolo di una risorsa per Dublin Core
-  'http://www.w3.org/2004/02/skos/core#prefLabel' // Label per una risorsa descritta da SKOS
+  'http://www.w3.org/2004/02/skos/core#prefLabel', // Label per una risorsa descritta da SKOS
+  'http://www.w3.org/2000/01/rdf-schema#label' // Label di default per RDF
 ]
 
 /**
@@ -47,6 +47,8 @@ const patternURI: (url: URI) => URI = pipe(
   (url: URL) => url.origin + url.pathname // Estrapolo dall'URL solo host e il path iniziale,
   // senza ancore o parametri
 )
+
+const alignUrl: (url: URI) => URI = url => url.replace('https', 'http')
 
 /**
  * @class
@@ -90,9 +92,12 @@ export default class Labeler {
     if (!validURL(uri)) {
       return Promise.resolve(uri)
     }
+
+    const formatedUri = alignUrl(uri)
+
     // Se ho già cachato la label della risorsa la ritorno senza fare chiamate.
     if (Labeler.store.has(uri)) {
-      return Promise.resolve(Labeler.store.get(uri) as string)
+      return Promise.resolve(Labeler.store.get(formatedUri) as string)
     }
 
     // Se ho settato un proxy, lo salvo per le chiamate successive
@@ -109,7 +114,7 @@ export default class Labeler {
       // ontologia per velocizzare il reperimento in un'unica chiamata di tutte le sue label
       uriForRequest = ifElse(contains('#'), pipe(patternURI, concat(Labeler.proxy)), concat(Labeler.proxy))(uri)
     } catch (e) {
-      Labeler.store.set(uri, uri)
+      Labeler.store.set(formatedUri, uri)
       return Promise.resolve(uri)
     }
 
@@ -126,15 +131,25 @@ export default class Labeler {
           ))
           .subscribe(
             // Salvo ogni tripla nella cache
-            (quad: Quad) => { quad?.subject?.value && Labeler.store.set(quad?.subject?.value, quad?.object?.value || id) },
+            (quad: Quad) => {
+              if (
+                quad?.subject?.value && (
+                  !Labeler.store.has(quad?.subject?.value)
+                  ||
+                  labelUris.indexOf(quad?.predicate?.value || '') > 0
+                )
+              ) {
+                  Labeler.store.set(alignUrl(quad?.subject?.value), quad?.object?.value || id)
+              }
+            },
             // Se la chiamata all'ontologia fallisce, salvo in cache l'identificativo e lo ritorno.
             // Il fallimento è dovuto al fallimento della chiamata fetch o dall'impossibilità di convertire il file
             // RDF in triple
-            _ => { Labeler.store.set(uri, id) && resolve(id) },
+            _ => { Labeler.store.set(formatedUri, id) && resolve(id) },
             // Alla fine del processo ritorno la label
             () => {
               // Wikidata: adatto l'URI cercato con la versione che viene ritornata nelle triple
-              const changeUri = ChangeURI.checkWikidata(uri).replace('wiki/Special:EntityData', 'entity')
+              const changeUri = ChangeURI.checkWikidata(formatedUri).replace('wiki/Special:EntityData', 'entity')
               resolve(Labeler.store.get(changeUri) || id)
             }
           )
@@ -153,7 +168,7 @@ export default class Labeler {
    */
   public static prepopulate (obj: Record<URI, string>): void {
     forEachObjIndexed((value: string, key: URI) => {
-      Labeler.store.set(key, value)
+      Labeler.store.set(alignUrl(key), value)
     }, obj)
   }
 
