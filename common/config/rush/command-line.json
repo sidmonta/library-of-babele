@@ -181,6 +181,15 @@
       "summary": "Start dev server",
       "description": "start dev server",
       "shellCommand": "node common/temp/node_modules/concurrently/bin/concurrently.js \"npm run start --prefix=$(pwd)/tools/Proxy\" \"npm run dev --prefix=$(pwd)/babele/backend\" \"npm run start --prefix=$(pwd)/babele/client\""
+    },
+    {
+      "commandKind": "bulk",
+      "name": "test",
+      "summary": "Test packages",
+      "description": "Run test packages",
+      "enableParallelism": false,
+      "ignoreMissingScript": true,
+      "safeForSimultaneousRushProcesses": false
     }
   ],
 
