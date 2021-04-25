@@ -90,7 +90,6 @@ export default class Labeler {
     if (!validURL(uri)) {
       return Promise.resolve(uri)
     }
-
     // Se ho già cachato la label della risorsa la ritorno senza fare chiamate.
     if (Labeler.store.has(uri)) {
       return Promise.resolve(Labeler.store.get(uri) as string)
@@ -127,7 +126,7 @@ export default class Labeler {
           ))
           .subscribe(
             // Salvo ogni tripla nella cache
-            (quad: Quad) => { quad?.subject?.value && Labeler.store.set(uri, quad?.object?.value || id) },
+            (quad: Quad) => { quad?.subject?.value && Labeler.store.set(quad?.subject?.value, quad?.object?.value || id) },
             // Se la chiamata all'ontologia fallisce, salvo in cache l'identificativo e lo ritorno.
             // Il fallimento è dovuto al fallimento della chiamata fetch o dall'impossibilità di convertire il file
             // RDF in triple

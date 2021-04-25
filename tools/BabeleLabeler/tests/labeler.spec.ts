@@ -5,7 +5,7 @@ describe('Labeler', function () {
 
   it('return label', function (done) {
       // expect(quad).not.toBe(null)
-    Labeler.prefetch(['http://dati.cdec.it/lod/bio-ext/bio-ext.rdf']).then(() => {
+    Labeler.prefetch(['data.predicate.value']).then(() => {
       Labeler.__('http://dati.cdec.it/lod/bio-ext/brother_sisterOf')
       .then(label => {
         console.log(label)
