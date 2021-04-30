@@ -23,10 +23,9 @@ export async function populateEndpointList(): Promise<void> {
   // Verifico se ho già inserito gli endpoint nella cache
   redisClient.lrange(CACHE_KEY_ENDPOINT_LIST, 0, -1, async (err, data) => {
     let endpoints: string[]
-    if (err || !data) {
+    if (err || !data.length) {
       // Se nella cache non sono presenti li inserisco
       endpoints = await getEndpoints()
-
       redisClient.del(CACHE_KEY_ENDPOINT_LIST)
       redisClient.lpush(CACHE_KEY_ENDPOINT_LIST, ...endpoints, () => {})
     } else {

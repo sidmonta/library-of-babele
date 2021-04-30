@@ -45,7 +45,10 @@ export default function WrapBookcase(props: WrapBookcaseProps) {
 
   return (
     <FullRow>
-      <WrapContainer>{bookcases.map(printBookcase)}</WrapContainer>
+      {bookcases.length ?
+        <WrapContainer>{bookcases.map(printBookcase)}</WrapContainer>
+        : <h3>Nessuna sotto categorie Dewey</h3>
+      }
     </FullRow>
   )
 }

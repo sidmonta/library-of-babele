@@ -26,10 +26,9 @@ export const haveNewBooks = selectorFamily({
   get: (dewey: string) => ({ get }) => {
     const newBooks = get(newbooks)
     return newBooks.filter((newbook) => {
-      console.log(dewey, newbook.dewey)
-      if (newbook.dewey === dewey || (dewey.endsWith('00') && dewey[0] === newbook.dewey[0])) {
+      if (newbook.dewey === dewey || (dewey.length === 1 && dewey[0] === newbook.dewey[0])) {
         return true
-      } else if (dewey.endsWith('00') && dewey[0] !== newbook.dewey[0]) {
+      } else if (dewey.length === 1 && dewey[0] !== newbook.dewey[0]) {
         return false
       }
 

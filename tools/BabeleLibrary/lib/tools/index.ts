@@ -1,5 +1,4 @@
 import { pipe } from 'ramda'
-import { parse } from 'url'
 import * as http from 'http'
 
 /**
@@ -104,19 +103,20 @@ export * from './WebSocketClient'
  * @param endpoint endpoint da controllarne la reperibilità
  */
 export const pingEndpoint = async (endpoint: string): Promise<boolean> => {
+  const endpointUrl = new URL(endpoint)
   const options: http.RequestOptions = {
     method: 'HEAD',
-    host: parse(endpoint).host,
+    host: endpointUrl.host,
     port: 80,
-    path: parse(endpoint).pathname,
-    timeout: 800,
+    path: endpointUrl.pathname,
+    timeout: 1000,
   }
   return new Promise((resolve: (value: boolean) => void): void => {
     try {
       const req = http.request(options, function (r) {
         resolve(r.statusCode ? r.statusCode < 200 : false)
       })
-      req.setTimeout(800, () => req.abort())
+      req.setTimeout(1000, () => req.abort())
       req.end()
       req.on('error', function (err) {
         console.error('Error on ping ' + endpoint, err)

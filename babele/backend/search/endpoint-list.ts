@@ -15,8 +15,13 @@ export const CACHE_KEY_ENDPOINT_LIST = process.env.CACHE_KEY_ENDPOINT_LIST
 const filterEndpoint = async (endpoints: string[]): Promise<string[]> => {
   const filteredEndpoint = []
   for (let endpoint of endpoints) {
-    if (await Tools.pingEndpoint(endpoint)) {
-      filteredEndpoint.push(endpoint)
+    try {
+      if (await Tools.pingEndpoint(endpoint)) {
+        console.log(`Add Endpoint ${endpoint}`)
+        filteredEndpoint.push(endpoint)
+      }
+    } catch (err) {
+      console.error(`Endpoint ${endpoint} not available`)
     }
   }
   return filteredEndpoint
@@ -151,6 +156,7 @@ export function callEndpoint(query: string) {
     format: 'application/json',
   })
   return (endpoint) => {
+    console.log(endpoint, query, fetchQueryString)
     const fetchParams = {
       url: {
         url: endpoint,

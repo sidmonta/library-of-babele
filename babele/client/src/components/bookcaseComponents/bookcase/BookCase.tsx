@@ -19,11 +19,14 @@ export default function BookCase(props: BookCaseProps) {
   const BookCaseImage = ThemeComponentFactory<{ label: string; dewey: string }>('bookcaseComponents/bookcase/BookCaseImage')
   const Badge = ThemeComponentFactory('bookcaseComponents/bookcase/BookCaseBadge')
   const numNewBooks = useRecoilValue(haveNewBooks(props.dewey))
+
+  const haveChildren = props.haveChildren || numNewBooks > 0
+
   return (
     <>
       <span
-        className={props.haveChildren ? 'actionable' : ''}
-        onClick={() => props.haveChildren && props.onClick(props)}
+        className={haveChildren ? 'actionable' : ''}
+        onClick={() => haveChildren && props.onClick(props)}
       >
         {numNewBooks > 0 && <Badge>{numNewBooks}</Badge>}
         <BookCaseImage label={props.name} dewey={props.dewey} />
