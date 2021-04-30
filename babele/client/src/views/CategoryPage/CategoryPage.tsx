@@ -16,16 +16,15 @@ export default function CategoryPage() {
 
   return (
     <div className="page-container category-page">
+      <WrapBookcase deweySelect={selectDewey} />
+      <Breadcrumbs dewey={selectDewey} />
+      <WoodBookcase title={selectDewey?.name || ''}>
+        <div className="wood-book">
+          <WrapBookList deweySelect={selectDewey} />
+        </div>
+      </WoodBookcase>
       <Switch>
-        <Route exact path={path}>
-          <WrapBookcase deweySelect={selectDewey} />
-          <Breadcrumbs dewey={selectDewey} />
-          <WoodBookcase title={selectDewey?.name || ''}>
-            <div className="wood-book">
-              <WrapBookList deweySelect={selectDewey} />
-            </div>
-          </WoodBookcase>
-        </Route>
+        <Route exact path={path} />
         <Route path={`${path}/book/:bookUri`}>
           <BookView />
         </Route>

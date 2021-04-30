@@ -30,6 +30,8 @@ interface Quad {
 const labelUris: URI[] = [
   'http://purl.org/dc/terms/title', // Titolo di una risorsa per Dublin Core
   'http://www.w3.org/2004/02/skos/core#prefLabel', // Label per una risorsa descritta da SKOS
+  'http://xmlns.com/foaf/0.1/name', // Label per i nomi delle persone
+  'https://schema.org/name', // Label per i nomi se definiti con schema.org
   'http://www.w3.org/2000/01/rdf-schema#label' // Label di default per RDF
 ]
 

@@ -1,10 +1,5 @@
-import React from 'react'
-
-export class BookcaseModel {
-  constructor () {}
-}
-
-export class BookModel {
-  constructor () {}
-
+export type Quad = {
+  subject: { value: string }
+  predicate: { value: string }
+  object: { value: string; termType: string, language: string }
 }

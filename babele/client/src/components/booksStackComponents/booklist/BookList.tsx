@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import AtomBook from '../../bookComponents/book/AtomBook'
+import {AiOutlineCloudDownload} from "react-icons/all";
+import {LoadMoreBtn} from "../../structure/structure";
 
 const getBookForPage = (books: string[], page: number) => {
   const numberToShow = 50
@@ -44,7 +46,10 @@ const BookList = ({ books }: { books: string[] }) => {
       {
         books.length - bookForPage.list.length > 0 &&
         <div className="loading" ref={loader} onClick={handleObserver}>
-          Load More {books.length - bookForPage.list.length} books
+          <LoadMoreBtn>
+            <span className='icon'><AiOutlineCloudDownload /></span>
+            <span className='badge'>{books.length - bookForPage.list.length}</span>
+          </LoadMoreBtn>
         </div>
       }
     </div>

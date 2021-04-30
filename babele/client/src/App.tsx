@@ -9,10 +9,13 @@ import SearchResult from './views/SearchResult/SearchResult'
 import SearchBar from './components/structure/searchbar/SearchBar'
 import { ThemeContext, Themes } from './context/theme'
 import Title from "./components/common/title/title";
+import {useNewBookHook} from "./store/books";
 
 const appTheme = process.env.REACT_APP_THEME as Themes
 
 function App() {
+  const newbooks = useNewBookHook(console.log)
+  console.log(newbooks)
   return (
     <ThemeContext.Provider value={appTheme}>
       <div className="App">

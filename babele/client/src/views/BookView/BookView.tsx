@@ -1,14 +1,19 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
-import BookStack from '../../components/booksStackComponents/bookstack/BookStack'
+import {useHistory, useParams} from 'react-router-dom'
+import WrapBook from "../../components/bookComponents/wrapbook/WrapBook";
 
 export default function BookView() {
-  const params: { bookUri: string } = useParams()
+  const params: { bookUri: string, categoryId: string } = useParams()
   const bookUri = decodeURIComponent(params.bookUri || '')
+  const history = useHistory()
+
+  const closeBook = () => {
+    history.replace({ pathname: '/category/' + params.categoryId })
+  }
+
   return (
     <div className="book-view">
-      <h3>BookView: {bookUri}</h3>
-      <BookStack first={bookUri} />
+      <WrapBook key={bookUri} book={bookUri} onClose={closeBook} />
     </div>
   )
 }

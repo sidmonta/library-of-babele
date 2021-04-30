@@ -38,7 +38,7 @@ class WebSocketClient {
             // Trasformo il messaggio in un oggetto
             const data = JSON.parse(event.data);
             if (!data.type || !data.payload) {
-                throw Error('Data recived is invalid');
+                throw Error('Data recived is invalid = ' + JSON.stringify(data));
             }
             // Se è definita qualche callback per il tipo di evento trasmesso
             if (this.eventsRegistry.has(data.type)) {

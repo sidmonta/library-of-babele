@@ -25,7 +25,7 @@ export default function BookCase(props: BookCaseProps) {
         className={props.haveChildren ? 'actionable' : ''}
         onClick={() => props.haveChildren && props.onClick(props)}
       >
-        {Math.random() > 0.5 && <Badge>{numNewBooks}</Badge>}
+        {numNewBooks > 0 && <Badge>{numNewBooks}</Badge>}
         <BookCaseImage label={props.name} dewey={props.dewey} />
       </span>
     </>

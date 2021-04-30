@@ -13,7 +13,9 @@ export const WoodContainer = styled.div`
     justify-content: center;
     position: sticky;
     top: 0;
-    padding-top: 25px;
+    padding: 15px;
+    z-index: 1;
+    background-color: #fcfcfc;
 
     .center-text {
       font-size: 30px;

@@ -8,8 +8,19 @@ import {
   WSNewBookClassified,
 } from './EffectTypes'
 import { fromPromise } from 'rxjs/internal-compatibility'
-import { distinct, filter, map, mergeMap, switchMap, tap } from 'rxjs/operators'
-import {from, merge, Observable, of, throwError} from 'rxjs'
+import {
+  concatMap,
+  distinct,
+  filter,
+  ignoreElements,
+  map,
+  mergeMap,
+  startWith,
+  switchMap,
+  take,
+  tap
+} from 'rxjs/operators'
+import {from, merge, Observable, of, throwError, timer} from 'rxjs'
 import Crawler from '@sidmonta/babelecrawler'
 import classify from '@sidmonta/classifier/lib/stream'
 import { allitem, smembers } from '../cache/redis.wrapper'
@@ -75,12 +86,20 @@ export function getBookData(cache) {
       // Stream of book info
       const bookData$: Observable<WSBookData> = crawler
         .getNewNodeStream()
-        .pipe(map((quad: Quad) => ({ type: generateType(Type.BOOKDATA), payload: { quad } })))
+        .pipe(
+          map((quad: Quad) =>
+            ({ type: generateType(Type.BOOKDATA), payload: { quad } })
+          ),
+          concatMap(val => timer(400).pipe(
+            ignoreElements(),
+            startWith(val)
+          ))
+        )
 
       // Stream of service where info from
       const bookService$: Observable<WSBookDataService> = crawler
         .getNewSourceStream()
-        .pipe(map((service: string) => ({ type: generateType(Type.BOOKDATASERVICE), payload: { service } })))
+        .pipe(map((service: string) => ({ type: generateType(Type.BOOKDATASERVICE), payload: { service } })), take(50))
 
       let firstService = {}
       bookService$.subscribe(service => {

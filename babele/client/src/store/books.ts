@@ -25,17 +25,32 @@ export const haveNewBooks = selectorFamily({
   key: 'have-new-books',
   get: (dewey: string) => ({ get }) => {
     const newBooks = get(newbooks)
-    return newBooks.filter((newbook) => newbook.dewey === dewey).length
+    return newBooks.filter((newbook) => {
+      console.log(dewey, newbook.dewey)
+      if (newbook.dewey === dewey || (dewey.endsWith('00') && dewey[0] === newbook.dewey[0])) {
+        return true
+      } else if (dewey.endsWith('00') && dewey[0] !== newbook.dewey[0]) {
+        return false
+      }
+
+      if (dewey.endsWith('0') && dewey[1] === newbook.dewey[1]) {
+        return true
+      } else if (dewey.endsWith('0') && dewey[1] !== newbook.dewey[1]) {
+        return false
+      }
+
+      return !dewey.includes('.') && dewey[2] === newbook.dewey[2]
+    }).length
   },
 })
 
-export const useNewBookHook = (onNewBook: (book: NewBook, allNewBooks: NewBook[], count: number) => void) => {
+export const useNewBookHook = (onNewBook?: (book: NewBook, allNewBooks: NewBook[], count: number) => void) => {
   const [newBooks, setNewBook] = useRecoilState<NewBook[]>(newbooks)
   const wsClient = useWebSocket()
   useEffect(() => {
     const identify = wsClient.on('NEWBOOK', async (book: WSNewBook) => {
       const deweyLabel: string = (await getDeweyLabel(`/get-dewey/${book.dewey}/label`)).label
-
+      console.log(book)
       const rewriteBookInfo = {
         uri: book.bookUri,
         dewey: book.dewey,
@@ -44,7 +59,9 @@ export const useNewBookHook = (onNewBook: (book: NewBook, allNewBooks: NewBook[]
 
       setNewBook((old: NewBook[]) => [rewriteBookInfo, ...old])
       // Call "onNewBook" for notify new book is arrive
-      onNewBook(rewriteBookInfo, newBooks, newBooks.length)
+      if (onNewBook) {
+        onNewBook(rewriteBookInfo, newBooks, newBooks.length)
+      }
     })
 
     return () => wsClient.removeListener('NEWBOOK', identify)
@@ -52,3 +69,14 @@ export const useNewBookHook = (onNewBook: (book: NewBook, allNewBooks: NewBook[]
 
   return newBooks
 }
+
+
+export const langSelected = atom<string>({
+  key: 'lang-selected',
+  default: 'en'
+})
+
+export const langAvailable = atom<string[]>({
+  key: 'lang-available',
+  default: []
+})
