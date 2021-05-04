@@ -12,7 +12,8 @@
   "module": "./build/index.js",
   "typings": "./build/index.d.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch --excludeDirectories tests --excludeDirectories node_modules"
   },
   "repository": {
     "type": "git",

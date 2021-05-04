@@ -180,7 +180,7 @@
       "name": "dev",
       "summary": "Start dev server",
       "description": "start dev server",
-      "shellCommand": "node common/temp/node_modules/concurrently/bin/concurrently.js \"npm run start --prefix=$(pwd)/tools/Proxy\" \"npm run dev --prefix=$(pwd)/babele/backend\" \"npm run start --prefix=$(pwd)/babele/client\""
+      "shellCommand": "node common/temp/node_modules/concurrently/bin/concurrently.js \"npm run dev --prefix=$(pwd)/tools/BabeleLibrary\" \"npm run dev --prefix=$(pwd)/tools/BabeleCrawler\" \"npm run dev --prefix=$(pwd)/tools/BabeleLabeler\" \"npm run dev --prefix=$(pwd)/tools/Classifier\" \"npm run start --prefix=$(pwd)/tools/Proxy\" \"npm run dev --prefix=$(pwd)/babele/backend\" \"npm run start --prefix=$(pwd)/babele/client\""
     },
     {
       "commandKind": "bulk",
