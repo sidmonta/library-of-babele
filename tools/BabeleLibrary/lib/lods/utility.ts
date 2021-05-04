@@ -1,5 +1,4 @@
 import { curry, last, split, pipe, hasPath } from 'ramda'
-import { parse } from 'url'
 import { Quad } from 'n3'
 import { trimCh } from '../tools'
 import axios from 'axios'
@@ -10,9 +9,9 @@ import { allCheck } from './changeUri'
  * @param uri URL dell'elemento
  */
 export const getID: (uri: string) => string | undefined = uri => {
-  let urld = parse(uri).path
+  let urld = new URL(uri)
   let get = pipe(trimCh('/'), split(/[\/#]/), last)
-  return urld ? get(uri) as string : undefined
+  return urld ? get(urld.href) as string : undefined
 }
 
 /**
