@@ -33,14 +33,18 @@ export const checkViaf: ChangeFn = createCheck('viaf', (uri: URI) => uri + '/rdf
 // OpenLibrary
 export const checkOpenLibrary: ChangeFn = createCheck('openlibrary', (uri: URI) => uri + '.rdf')
 
+// Beniculturali
+export const checkBeniculturali: ChangeFn = createCheck('beniculturali', (uri: URI) => uri + '.html?output=application%2Frdf%2Bxml')
+
+export const allCheckFunctions: NonEmptyArray<ChangeFn> = [checkWikidata, checkViaf, checkOpenLibrary, checkBeniculturali]
 // Aggraga tutti i modificatori di URI
-export const allCheck = pipe(checkWikidata, checkViaf, checkOpenLibrary)
+export const allCheck = pipe(checkWikidata, checkViaf, checkOpenLibrary, checkBeniculturali)
 
 
 function baseChangeURI() {
   // Aggiunta dei modificatori di base
   // TODO: Implementare meccanismo per il recupero da un database di questi modificatori
-  let aggregate: NonEmptyArray<ChangeFn> = [checkWikidata, checkViaf, checkOpenLibrary]
+  let aggregate: NonEmptyArray<ChangeFn> = allCheckFunctions
   // Creazione di una funzione per l'aggregazione o l'esecuzione delle modifiche all'URI
   const control: control = (is?: string, change?: ChangeFn) => {
     // Se ho definito sia il criterio che la funzione di modifica, aggiungo il nuovo criterio nell'aggregatore
