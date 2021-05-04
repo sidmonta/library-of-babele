@@ -4,8 +4,11 @@ import { useParams } from 'react-router-dom'
 import WoodBookcase from '../../components/bookcaseComponents/woodbookcase/WoodBookcase'
 import BookList from '../../components/booksStackComponents/booklist/BookList'
 import { useWebSocket, useWSData } from '../../context/websocket'
+import {Route, Switch, useRouteMatch} from "react-router";
+import BookView from "../BookView/BookView";
 
 export default function SearchResult() {
+  let { path } = useRouteMatch()
   const { query } = useParams<{ query: string }>()
   const webSocketClient = useWebSocket()
   const [books, setBook] = useWSData<string>('BOOKSEARCH')
@@ -24,6 +27,12 @@ export default function SearchResult() {
           <BookList books={books} />
         </div>
       </WoodBookcase>
+      <Switch>
+        <Route exact path={path} />
+        <Route path={`${path}/book/:bookUri`}>
+          <BookView />
+        </Route>
+      </Switch>
     </div>
   )
 }

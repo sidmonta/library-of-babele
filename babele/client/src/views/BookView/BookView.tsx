@@ -8,7 +8,7 @@ export default function BookView() {
   const history = useHistory()
 
   const closeBook = () => {
-    history.replace({ pathname: '/category/' + params.categoryId })
+    history.goBack()
   }
 
   return (
