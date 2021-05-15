@@ -32,7 +32,7 @@ export function useRedirect() {
   const navigate = useHistory()
   const location = useLocation()
 
-  const basePathRegex = new RegExp('^(/category/[0-9]+)')
+  const basePathRegex = new RegExp('^(/category/[0-9]+|/search/[A-Za-z0-9]+)')
   const match = basePathRegex.exec(location.pathname)
   const basePath = match && match[1] ? match[1] : location.pathname
   return (url: string) => {
