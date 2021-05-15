@@ -1,7 +1,7 @@
 import { WsEffect } from '@marblejs/websockets'
 import { act, Event, matchEvent } from '@marblejs/core'
-import { map } from 'rxjs/operators'
-import { pipe } from 'fp-ts/lib/pipeable'
+import {catchError, map} from 'rxjs/operators'
+import { pipe } from 'fp-ts/lib/function'
 import { reply } from '@marblejs/messaging'
 import { Observable, of } from 'rxjs'
 import { redisClient } from '../cache/redis.context'
@@ -31,7 +31,8 @@ const EffectGenerator = <A>(eventType: Type, method: (event: Event) => Observabl
             type: eventType,
             payload,
           })
-        )
+        ),
+        catchError((err, caught) => caught)
       )
     })
   )
@@ -53,7 +54,8 @@ export const bookData$ = (event$: Observable<Event>) => {
             type: eventOutData.type,
             payload: eventOutData.payload,
           })
-        )
+        ),
+        catchError((err, caught) => caught)
       )
     })
   )
