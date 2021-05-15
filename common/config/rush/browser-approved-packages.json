@@ -75,6 +75,10 @@
       "allowedCategories": [ "production" ]
     },
     {
+      "name": "browser-mime",
+      "allowedCategories": [ "production" ]
+    },
+    {
       "name": "concurrently",
       "allowedCategories": [ "production" ]
     },
@@ -172,6 +176,10 @@
     },
     {
       "name": "react-icons",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "react-photoswipe-gallery",
       "allowedCategories": [ "production" ]
     },
     {
