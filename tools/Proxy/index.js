@@ -17,6 +17,7 @@ app.use('/*', (req, res) => {
       res.sendStatus(500)
     } else {
       res.set(data.headers)
+      res.set('Content-Encoding', '');
       res.send(data.body)
     }
   })
