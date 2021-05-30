@@ -66,6 +66,7 @@ common/autoinstallers/*/.npmrc
 
 .idea
 .vscode
+.run
 
 tools/Classifier/lib/
 tools/BabeleLibrary/build/
