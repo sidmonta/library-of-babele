@@ -11,7 +11,7 @@ const mime = require('mime-types')
 function getExtensions(ext: string): string[] {
   const aggregator: string[] = []
   for (const type in mime.extensions as Record<string, string[]>) {
-    if (mime.extensions.hasOwnProperty(type) && type.startsWith(ext)) {
+    if (type.startsWith(ext)) {
       aggregator.push(...mime.extensions[type])
     }
   }
@@ -19,7 +19,7 @@ function getExtensions(ext: string): string[] {
 }
 
 const generateRegexFromArray = (...elements: string[]) =>
-  new RegExp(`(${elements.join('|')})$`, 'i')
+  new RegExp(`\\.(${elements.join('|')})$`, 'i')
 
 export interface MediaBookProps {
   data: Observable<{ quad: Quad}>

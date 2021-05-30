@@ -49,7 +49,6 @@ export const useNewBookHook = (onNewBook?: (book: NewBook, allNewBooks: NewBook[
   useEffect(() => {
     const identify = wsClient.on('NEWBOOK', async (book: WSNewBook) => {
       const deweyLabel: string = (await getDeweyLabel(`/get-dewey/${book.dewey}/label`)).label
-      console.log(book)
       const rewriteBookInfo = {
         uri: book.bookUri,
         dewey: book.dewey,

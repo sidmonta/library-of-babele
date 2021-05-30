@@ -57,7 +57,6 @@ export function useWSDataAsStream<A>(eventType: string) {
     })
 
     return () => {
-      console.log('remove listener')
       webSocketClient.removeListener(eventType, identify)
       subject.complete()
     }

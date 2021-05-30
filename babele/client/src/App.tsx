@@ -15,7 +15,6 @@ const appTheme = process.env.REACT_APP_THEME as Themes
 
 function App() {
   const newbooks = useNewBookHook(console.log)
-  console.log(newbooks)
   return (
     <ThemeContext.Provider value={appTheme}>
       <div className="App">
