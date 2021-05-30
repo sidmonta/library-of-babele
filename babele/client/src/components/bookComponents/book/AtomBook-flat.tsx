@@ -6,6 +6,7 @@ const BookCover = styled.div`
   height: 80px;
   border-radius: 50%;
   border: 1px solid black;
+  box-shadow: -3px 3px 10px black;
 `
 
 export default BookCover

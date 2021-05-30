@@ -31,6 +31,7 @@ const BookCover = styled.div`
   transition: 0.4s ease-out;
   position: relative;
   left: 0;
+  box-shadow: -5px 0 9px 0 #7171716e;
 
   &:not(:first-child) {
     margin-left: -50px;

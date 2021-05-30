@@ -1,6 +1,3 @@
-import 'photoswipe/dist/photoswipe.css'
-import 'photoswipe/dist/default-skin/default-skin.css'
-const mime = require('mime-types')
 import type PhotoSwipe from "photoswipe"
 
 import { Gallery, Item } from 'react-photoswipe-gallery'
@@ -11,15 +8,22 @@ import AudioPlaceholder from '../../../img/audio-placeholder.png'
 import VideoPlaceholder from '../../../img/video-placeholder.jpeg'
 import DocPlaceholder from '../../../img/doc-placeholder.jpeg'
 
+import 'photoswipe/dist/photoswipe.css'
+import 'photoswipe/dist/default-skin/default-skin.css'
+
+const mime = require('mime-types')
+
 interface ItemProps {
   src: string,
   origin: string,
-  title: string
+  title: string,
+  width?: number,
+  height?: number
 }
 
 const htmlForVideo = (src: string) => `
 <div style="width: 100%; height: 100%; display: flex; align-content: center; justify-content: center; align-items: center;">
-    <video controls>
+    <video style="max-width: 80vw" controls>
         <source src="${src}" type="${mime.lookup(src)}">
         Your browser does not support the video tag.
     </video>
@@ -45,8 +49,8 @@ const htmlForDoc = (src: string, title: string) => `
 const ImageItem = (props: ItemProps) => {
   return (<Item
     original={props.src}
-    width="0"
-    height="0"
+    width={props.width || "0"}
+    height={props.height || "0"}
   >
     {({ref, open }) => (
       // @ts-ignore
@@ -106,9 +110,9 @@ export default function PhotoswipeGallery({ media }: {media: MediaObject}) {
   const options: PhotoSwipe.Options = {}
 
   const onOpen = (gallery: PhotoSwipe<typeof options>) => {
-    gallery.listen('gettingData', function(index: number, item: PhotoSwipe.Item) {
-      const itemW = item.w || 100
-      const itemH = item.h || 100
+    const updateSize = (item: PhotoSwipe.Item) => {
+      const itemW = typeof item.w === 'undefined' ?  100 : item.w
+      const itemH = typeof item.h === 'undefined' ?  100 : item.h
       const itemSrc = item.src || ''
       if (itemW < 1 || itemH < 1) { // unknown size
         const img = new Image()
@@ -120,6 +124,13 @@ export default function PhotoswipeGallery({ media }: {media: MediaObject}) {
         }
         img.src = itemSrc
       }
+    }
+
+    gallery.listen('imageLoadComplete', function(index, item) {
+      updateSize(item)
+    });
+    gallery.listen('gettingData', function(index: number, item: PhotoSwipe.Item) {
+      updateSize(item)
     });
   }
 
