@@ -159,6 +159,10 @@
       "allowedCategories": [ "production" ]
     },
     {
+      "name": "photoswipe",
+      "allowedCategories": [ "production" ]
+    },
+    {
       "name": "ramda",
       "allowedCategories": [ "libraries", "production", "tools" ]
     },
