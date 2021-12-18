@@ -3,14 +3,14 @@ import {
   WSBookData,
   WSBookDataIn,
   WSBookDataService,
-  WSBookList,
+  WSBookList, WSBookListOut,
   WSBookSearch,
   WSNewBookClassified,
 } from './EffectTypes'
 import { fromPromise } from 'rxjs/internal-compatibility'
 import {
   concatMap,
-  distinct,
+  distinct, distinctUntilChanged,
   filter,
   ignoreElements,
   map,
@@ -23,7 +23,7 @@ import {
 import {from, merge, Observable, of, throwError, timer} from 'rxjs'
 import Crawler from '@sidmonta/babelecrawler'
 import classify from '@sidmonta/classifier/lib/stream'
-import { allitem, smembers } from '../cache/redis.wrapper'
+import {allitem, pagination} from '../cache/redis.wrapper'
 import { CACHE_KEY_ENDPOINT_LIST, callEndpoint } from '../search/endpoint-list'
 import * as N3 from 'n3'
 import { filterByPing, formatDocument, LODDocument } from '@sidmonta/babelelibrary/build/stream'
@@ -43,12 +43,17 @@ const classy = classify<LODDocument>({
  * @param cache
  */
 export function getBookListFromCache(cache) {
+  const fetchFromCache = pagination(cache)
+
   return ({ payload }: WSBookList) => {
     const dewey = payload.id + (payload.id.length === 1 ? '00' : '')
+    const page = payload.page || 0
+
     try {
-      return fromPromise(smembers(cache)(dewey)).pipe(mergeMap((list: string[]) => from(list)))
+      return fetchFromCache(dewey, page, 10).pipe(map((output): WSBookListOut =>
+        ({ type: Type.BOOKLIST + '_' + payload.id, payload: { book: output.value, totItems: output.totItems} })
+      ))
     } catch (err) {
-      console.log(dewey, err)
       return throwError(err)
     }
   }
@@ -88,6 +93,7 @@ export function getBookData(cache) {
       const bookData$: Observable<WSBookData> = crawler
         .getNewNodeStream()
         .pipe(
+          distinctUntilChanged((a, b) => a.object.value === b.object.value),
           map((quad: Quad) =>
             ({ type: generateType(Type.BOOKDATA), payload: { quad } })
           ),
@@ -133,7 +139,8 @@ export function getBookData(cache) {
       crawler.run(uri)
 
       // Merge of all different type of response
-      return merge(of(firstService), bookService$, bookData$, newBookClassified$)
+      // return merge(of(firstService), bookService$, bookData$, newBookClassified$)
+      return merge(of(firstService), bookService$, bookData$, )
       // return [bookData$, bookService$, newBookClassified$]
     }
     return throwError(new Error('No URI found for crawling'))

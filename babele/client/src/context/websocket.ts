@@ -40,7 +40,10 @@ export function useWSData<A>(eventType: string, lang?: string): [A[], Dispatch<S
       }
     })
 
-    return () => webSocketClient.removeListener(eventType, identify)
+    return () => {
+      webSocketClient.removeListener(eventType, identify)
+      setElements([])
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

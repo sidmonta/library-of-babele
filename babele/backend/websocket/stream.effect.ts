@@ -5,7 +5,7 @@ import { pipe } from 'fp-ts/lib/function'
 import { reply } from '@marblejs/messaging'
 import { Observable, of } from 'rxjs'
 import { redisClient } from '../cache/redis.context'
-import { Type, WSBookDataIn, WSBookDataOut } from './EffectTypes'
+import {Type, WSBookDataIn, WSBookDataOut, WSBookList, WSBookListOut} from './EffectTypes'
 import { getBookListFromCache, searchFromCache, getBookData } from './stream.response'
 
 // Passa la cache ai vari servizi
@@ -41,7 +41,23 @@ const EffectGenerator = <A>(eventType: Type, method: (event: Event) => Observabl
 /**
  * Effetto per la gestione della richiesta della lista di libri
  */
-export const bookList$ = EffectGenerator(Type.BOOKLIST, getBookList)
+export const bookList$ = (event$: Observable<Event>) => {
+  return event$.pipe(
+    matchEvent(Type.BOOKLIST),
+    act((event: WSBookList) => {
+      return pipe(
+        getBookList(event),
+        map((eventOutData: WSBookListOut | never) =>
+          reply(event)({
+            type: eventOutData.type,
+            payload: eventOutData.payload,
+          })
+        ),
+        catchError((err, caught) => caught)
+      )
+    })
+  )
+}
 
 export const bookData$ = (event$: Observable<Event>) => {
   return event$.pipe(

@@ -20,7 +20,12 @@ export enum Type {
  */
 export interface WSBookList extends Event {
   type: Type.BOOKLIST
-  payload: { id: string }
+  payload: { id: string, page?: number }
+}
+
+export interface WSBookListOut extends Event {
+  type: string,
+  payload: { book: string, totItems: number}
 }
 
 /**

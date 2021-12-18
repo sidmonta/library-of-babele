@@ -14,13 +14,18 @@ export const useLabel = (uri: string, lang?: string | undefined) => {
   const [label, setLabel] = useState<string>(uri)
 
   useEffect(() => {
-    const getLabel = async (uri: string) => {
-      const l: string = await __(uri, lang, process.env.REACT_APP_PROXY)
-      setLabel(l)
-    }
+    let controller = new AbortController();
+
     if (uri) {
-      getLabel(uri).then()
+      const getLabel = new Promise((resolve, reject) => {
+        __(uri, lang, process.env.REACT_APP_PROXY).then(setLabel).then(resolve)
+        controller.signal.addEventListener('abort', reject);
+      })
+
+      getLabel.catch(() => {})
     }
+
+    return () => controller.abort()
   }, [uri, lang])
 
   return [label, setLabel]
