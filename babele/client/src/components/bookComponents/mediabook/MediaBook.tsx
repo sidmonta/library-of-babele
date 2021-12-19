@@ -47,7 +47,6 @@ const ImgStack = styled.div`
   position: relative;
   cursor: pointer;
   & > img {
-    position: absolute;
     width: 100px;
     height: 150px;
     top: 0;

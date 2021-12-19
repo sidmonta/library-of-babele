@@ -20,51 +20,53 @@ const BookContainer = styled.div`
   height: 100%;
 
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr 1.4fr 0.6fr;
-  grid-template-rows: 0.7fr 0.3fr 1.6fr;
+  grid-template-columns: 50px 1fr 4fr 50px;
+  grid-template-rows: 50px 1fr 30px 5fr;
   gap: 16px 8px;
-  grid-template-areas:
-    "book-media book-title book-title select-lang"
-    "book-service book-service book-service book-service"
-    "book-data book-data book-data book-data";
+
+  .close-btn {
+    grid-column: 1 / 1;
+  }
+  .select-lang {
+    grid-column-start: -1;
+    grid-row-start: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
 
   .book-media {
-    grid-area: book-media;
+    grid-row-start: 2;
+    grid-column-start: 2;
     display: flex;
     align-content: center;
     justify-content: center;
     align-items: center;
   }
   .book-title {
-    grid-area: book-title;
+    grid-column-start: 3;
+    grid-row-start: 2;
     display: flex;
     align-content: center;
     justify-content: center;
     align-items: center;
   }
-  .select-lang {
-    grid-area: select-lang;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-  }
   .book-service {
-    grid-area: book-service;
+    grid-column: 1 / -1;
+    grid-row: 3 / 4;
     display: flex;
     align-content: center;
     justify-content: flex-start;
     overflow-x: scroll;
   }
   .book-data {
-    grid-area: book-data;
+    grid-row-start: 4;
+    grid-column: 1 / -1;
     overflow-y: auto;
   }
 `
 
 const CloseBtn = styled.button`
-  position: absolute;
-  top: 0;
-  left: 0;
   font-size: var(--default-main-btn-size);
   background: none;
   color: inherit;
@@ -91,8 +93,10 @@ export default function WrapBook({ book, onClose }: WrapBookProps) {
 
   return (
     <BookContainer>
-      <div className="book-media">
+      <div className="close-btn">
         <CloseBtn onClick={() => onClose && onClose(book)}><AiOutlineCloseCircle /></CloseBtn>
+      </div>
+      <div className="book-media">
         <MediaBook data={data$} />
       </div>
       <div className="book-title">
