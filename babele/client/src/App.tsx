@@ -6,7 +6,7 @@ import CategoryPage from './views/CategoryPage/CategoryPage'
 
 import NavMenu from './views/Menu/NavMenu'
 import SearchResult from './views/SearchResult/SearchResult'
-import SearchBar from './components/structure/searchbar/SearchBar'
+import SearchBar from './components/common/searchbar/SearchBar'
 import { ThemeContext, Themes } from './context/theme'
 import Title from "./components/common/title/title";
 // import {useNewBookHook} from "./store/books";

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { useWSData } from '../../../context/websocket'
 import {useGrabFavicon} from "../../../context/favicon";
 import styled from "styled-components";
-import {InlineList} from "../../structure/structure";
+import {InlineList} from "../../common/structure";
 
 const FaviconImg = styled.img`
   width: 30px;

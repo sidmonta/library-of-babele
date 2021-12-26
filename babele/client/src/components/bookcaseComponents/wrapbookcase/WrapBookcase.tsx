@@ -5,7 +5,7 @@ import { fetchAPI } from '../../../services'
 import BookCase from '../bookcase/BookCase'
 import { useHistory } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
-import {FullRow, WrapContainer} from "../../structure/structure";
+import {FullRow, WrapContainer} from "../../common/structure";
 
 export type WrapBookcaseProps = {
   deweySelect: DeweyCategory | null
