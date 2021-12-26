@@ -3,15 +3,15 @@
  * @param deweyTable
  */
 export const sqlGenerateHierarchy = (deweyTable: string) => `
-SELECT group_concat(name) 
+SELECT group_concat(name)
 FROM (
   SELECT (d2.id || ';' || d2.parent || ';' || name) as name
   FROM dewey d2
-  WHERE 
+  WHERE
     d2.id = substr(d.parent, 1, 1) || '00'
     OR d2.id = substr(d.parent, 1, 2) || '0'
     OR d2.id = ${deweyTable}.parent
-) as pp`
+)`
 
 /**
  * Query per la verifica se un dewey ha dei sottoelementi
@@ -33,12 +33,12 @@ export const sqlWhereDeweyId = (deweyId: string) => (deweyTable: string) => `${d
  * @return where La funzione per la generazione della WHERE della query
  */
 export const sqlGetDeweyInfo = (deweyTable: string) => (where: (deweyTable: string) => string) => `
-    SELECT 
+    SELECT
       id as dewey,
       name,
       parent,
       (${sqlGenerateHierarchy(deweyTable)}) as hierarchy,
       (${sqlHaveChild(deweyTable)}) as 'haveChild'
-    FROM dewey ${deweyTable} 
+    FROM dewey ${deweyTable}
     WHERE ${where(deweyTable)}
 `

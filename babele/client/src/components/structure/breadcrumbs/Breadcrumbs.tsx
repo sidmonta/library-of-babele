@@ -58,9 +58,9 @@ type BreadcrumbsProps = {
 }
 
 const printHierarchy = (dewey: DeweyCategory) => {
-  return dewey.hierarchy.map((d) => (
+  return dewey.hierarchy.map((d, index) => (
     <Item key={d.dewey}>
-      <Link to={'/category/' + d.dewey}><span>{d.name}</span></Link>
+      <Link to={'/category/' + (index === 0 ? d.parent : d.dewey)}><span>{d.name}</span></Link>
     </Item>
   ))
 }
@@ -70,6 +70,7 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
   if (!dewey) {
     return <span>No dewey</span>
   }
+
   return (
       <List>
         <Item>

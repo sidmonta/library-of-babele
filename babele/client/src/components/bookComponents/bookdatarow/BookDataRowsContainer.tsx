@@ -40,7 +40,7 @@ export default function BookDataRowsContainer(props: { data: Observable<{ quad: 
     })
 
     return () => subscriber.unsubscribe()
-  }, [lang])
+  }, [lang, stream])
 
   return (
     <div>

@@ -139,8 +139,8 @@ export function getBookData(cache) {
       crawler.run(uri)
 
       // Merge of all different type of response
-      // return merge(of(firstService), bookService$, bookData$, newBookClassified$)
-      return merge(of(firstService), bookService$, bookData$, )
+      return merge(of(firstService), bookService$, bookData$, newBookClassified$)
+      // return merge(of(firstService), bookService$, bookData$, )
       // return [bookData$, bookService$, newBookClassified$]
     }
     return throwError(new Error('No URI found for crawling'))

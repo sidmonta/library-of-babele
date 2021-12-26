@@ -36,7 +36,7 @@ export default function WrapBookList({ deweySelect }: { deweySelect: DeweyCatego
       setBooks([])
       setCurrentPage(0)
     }
-  }, [deweyId])
+  }, [deweyId, setBooks, setCurrentPage])
 
   useEffect(() => {
     if (deweyId) {
@@ -69,7 +69,7 @@ export default function WrapBookList({ deweySelect }: { deweySelect: DeweyCatego
     }
 
     return () => observer.disconnect()
-  }, [])
+  }, [loaderDom])
 
   return (
     <div>

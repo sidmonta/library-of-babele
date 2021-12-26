@@ -45,7 +45,7 @@ export function useWSData<A>(eventType: string, lang?: string): [A[], Dispatch<S
       setElements([])
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [eventType])
 
   return [elements, setElements]
 }
