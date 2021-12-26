@@ -25,7 +25,7 @@ export default function BookCase(props: BookCaseProps) {
   return (
     <>
       <span
-        className={haveChildren ? 'actionable' : ''}
+        className={haveChildren ? 'actionable' : 'non-actionable'}
         onClick={() => haveChildren && props.onClick(props)}
       >
         {numNewBooks > 0 && <Badge>{numNewBooks}</Badge>}
