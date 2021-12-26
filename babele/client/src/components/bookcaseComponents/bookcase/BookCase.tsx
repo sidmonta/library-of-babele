@@ -2,6 +2,7 @@ import React from 'react'
 import { ThemeComponentFactory } from '../../../context/theme'
 import { haveNewBooks } from '../../../store/books'
 import { useRecoilValue } from 'recoil'
+import BookCaseBadge from "../bookcasebadge/BookCaseBadge";
 
 export interface BookCaseType {
   dewey: string
@@ -17,7 +18,6 @@ export interface BookCaseProps extends BookCaseType {
 
 export default function BookCase(props: BookCaseProps) {
   const BookCaseImage = ThemeComponentFactory<{ label: string; dewey: string }>('bookcaseComponents/bookcase/BookCaseImage')
-  const Badge = ThemeComponentFactory('bookcaseComponents/bookcase/BookCaseBadge')
   const numNewBooks = useRecoilValue(haveNewBooks(props.dewey))
 
   const haveChildren = props.haveChildren || numNewBooks > 0
@@ -28,7 +28,7 @@ export default function BookCase(props: BookCaseProps) {
         className={haveChildren ? 'actionable' : 'non-actionable'}
         onClick={() => haveChildren && props.onClick(props)}
       >
-        {numNewBooks > 0 && <Badge>{numNewBooks}</Badge>}
+        <BookCaseBadge number={numNewBooks} />
         <BookCaseImage label={props.name} dewey={props.dewey} />
       </span>
     </>
