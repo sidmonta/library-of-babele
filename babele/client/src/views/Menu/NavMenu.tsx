@@ -8,18 +8,10 @@ export default function NavMenu() {
   const open = () => setOpen(true)
   const close = () => setOpen(false)
 
-  const handleOpen = () => {
-    open()
-  }
-
-  const handleClose = () => {
-    close()
-  }
-
   return (
     <nav className="menu">
-      <MenuBtn onOpen={handleOpen} onClose={handleClose} open={isOpen} />
-      <MenuModal open={isOpen} emitClose={handleClose} />
+      <MenuBtn onOpen={open} onClose={close} open={isOpen} />
+      <MenuModal open={isOpen} emitClose={close} />
     </nav>
   )
 }

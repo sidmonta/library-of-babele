@@ -4,7 +4,7 @@ import './App.css'
 import Home from './views/Home/Home'
 import CategoryPage from './views/CategoryPage/CategoryPage'
 
-import NavMenu from './components/structure/menu/NavMenu'
+import NavMenu from './views/Menu/NavMenu'
 import SearchResult from './views/SearchResult/SearchResult'
 import SearchBar from './components/structure/searchbar/SearchBar'
 import { ThemeContext, Themes } from './context/theme'

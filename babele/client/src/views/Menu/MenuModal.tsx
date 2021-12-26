@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import DeweyClassInfo, {deweyDescription, DeweyClass} from "../../../views/Menu/DeweyInfo";
 import {AiOutlineHome} from "react-icons/all";
-import Title from "../../common/title/title";
+import Title from "../../components/common/title/title";
+import {AbstractSection, DeweySection, LinkSection} from "./MenuSections";
 
 const ModalContainer = styled.div`
   opacity: ${(props: MenuModalProps) => (props.open ? 1 : 0)};
@@ -69,7 +69,7 @@ const Grid = styled.div`
 
   .links {
     grid-row: 4 / 5;
-    grid-column: 2˙ / -1;
+    grid-column: 2 / -1;
   }
 `
 
@@ -97,33 +97,13 @@ export default function MenuModal(props: MenuModalProps) {
           <Title size={36}>Babele's Library</Title>
         </div>
         <div className="abstract">
-          <Title size={18} className="sub-title">Abstract</Title>
-          <p>
-            I Linked Open Data sono un importante strumento di rappresentazione della conoscenza che nel corso degli
-            ultimi anni ha visto una crescita smisurata, generando un grande numero di servizi interconnessi che rendono
-            tale conoscenza liberamente consultabile. Però il numero elevato di servizi diversi e la difficoltà di
-            utilizzo dei LOD rendono questa enorme conoscenza difficile da navigare.
-          </p>
-          <p>
-            Prendendo spunto dal racconto “La Biblioteca di Babele” di Borges il progetto cerca di sviluppare un
-            aggregatore di risorse LOD, dandogli la forma di una Biblioteca in cui gli “infiniti” libri contengono la
-            conoscenza che le risorse LOD descrivono.
-          </p>
-          <p>
-            I propositi del progetto sono di studiare un meccanismo di organizzazione delle risorse utilizzando i
-            criteri di classificazione biblioteconomica per agevolare la navigazione dell’utente attraverso il sistema
-            e utilizzare le interconnessioni tra le risorse per aggiungere risorse alla piattaforma durante la
-            navigazione dell’utente ed evitare così le difficili interazione con i diversi servizi LOD.
-          </p>
+          <AbstractSection />
         </div>
-        <div className="infoDewey" color={'red'}>
-          <Title size={18} className="sub-title">Definzione Dewey</Title>
-          <div className="dewey-container">
-            {(Object.keys(deweyDescription) as DeweyClass[]).map((key: DeweyClass) => <DeweyClassInfo key={key} deweyClass={key} />)}
-          </div>
+        <div className="infoDewey">
+        <DeweySection />
         </div>
         <div className="links">
-          ciao
+          <LinkSection />
         </div>
       </Grid>
     </ModalContainer>
