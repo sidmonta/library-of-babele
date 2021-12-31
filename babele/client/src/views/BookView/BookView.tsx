@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {useHistory, useParams} from 'react-router-dom'
 import WrapBook from "../../components/bookComponents/wrapbook/WrapBook";
-import {customDecodeUri, customEncodeUri} from "@sidmonta/babelelibrary/build/tools";
+import {customEncodeUri} from "@sidmonta/babelelibrary/build/tools";
 
 export default function BookView() {
   const params: { bookUri: string, categoryId: string, query: string } = useParams()
