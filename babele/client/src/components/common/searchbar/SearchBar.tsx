@@ -1,6 +1,7 @@
 import React, { KeyboardEvent, ChangeEvent, useState } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import { useHistory } from 'react-router-dom'
+import {customEncodeUri} from "@sidmonta/babelelibrary/build/tools";
 
 type SearchBarProps = { closed: boolean; onClick?: () => void }
 
@@ -184,7 +185,7 @@ export default function SearchBar() {
 
   const handleSubmit = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      history.push('/search/' + query)
+      history.push('/search/' + customEncodeUri(query))
       setClose(true)
       setQuery('')
     }

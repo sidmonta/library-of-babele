@@ -1,4 +1,4 @@
-import { pipe } from 'ramda'
+import {pipe, replace} from 'ramda'
 import * as http from 'http'
 import * as https from 'https'
 
@@ -122,4 +122,12 @@ export const pingEndpoint = async (endpoint: string): Promise<boolean> => {
       resolve(false)
     }
   })
+}
+
+export const customEncodeUri = (uri: string): string => {
+  return replace(/\s+/g, '+', uri)
+}
+
+export const customDecodeUri = (encodedUri: string): string => {
+  return replace(/\+/g, ' ', encodedUri)
 }

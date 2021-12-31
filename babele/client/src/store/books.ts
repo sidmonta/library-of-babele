@@ -26,19 +26,18 @@ export const haveNewBooks = selectorFamily({
   get: (dewey: string) => ({ get }) => {
     const newBooks = get(newbooks)
     return newBooks.filter((newbook) => {
-      if (newbook.dewey === dewey || (dewey.length === 1 && dewey[0] === newbook.dewey[0])) {
-        return true
-      } else if (dewey.length === 1 && dewey[0] !== newbook.dewey[0]) {
-        return false
+      const newdewey = newbook.dewey
+
+      // Se il nuovo libro appartiene alla stessa categoria dewey o comunque alla sua classe allora ha nuovi libri
+      if (dewey[0] !== newdewey[0]) return false
+      if (dewey === newdewey || dewey === newdewey[0]) return true
+
+      if (dewey.endsWith('0')) {
+        // Controllo se il secondo carattere dewey è lo stesso per quello del nuovo libro
+        return dewey[1] === newdewey[1]
       }
 
-      if (dewey.endsWith('0') && dewey[1] === newbook.dewey[1]) {
-        return true
-      } else if (dewey.endsWith('0') && dewey[1] !== newbook.dewey[1]) {
-        return false
-      }
-
-      return !dewey.includes('.') && dewey[2] === newbook.dewey[2]
+      return !dewey.includes('.') && dewey[2] === newdewey[2]
     }).length
   },
 })

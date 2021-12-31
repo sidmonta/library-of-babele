@@ -6,6 +6,7 @@ import BookList from '../../components/booksStackComponents/booklist/BookList'
 import { useWebSocket, useWSData } from '../../context/websocket'
 import {Route, Switch, useRouteMatch} from "react-router";
 import BookView from "../BookView/BookView";
+import {customDecodeUri} from "@sidmonta/babelelibrary/build/tools";
 
 export default function SearchResult() {
   let { path } = useRouteMatch()
@@ -16,13 +17,14 @@ export default function SearchResult() {
   useEffect(() => {
     if (query) {
       setBook([])
-      webSocketClient.emit('BOOKSEARCH', { query })
+      webSocketClient.emit('BOOKSEARCH', { query: customDecodeUri(query) })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query])
+
   return (
     <div className="page-container">
-      <WoodBookcase title={query || ''}>
+      <WoodBookcase title={customDecodeUri(query) || ''}>
         <div className="wood-book">
           <BookList books={books} />
         </div>

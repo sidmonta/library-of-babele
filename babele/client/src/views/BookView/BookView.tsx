@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import {useHistory, useParams} from 'react-router-dom'
 import WrapBook from "../../components/bookComponents/wrapbook/WrapBook";
+import {customDecodeUri, customEncodeUri} from "@sidmonta/babelelibrary/build/tools";
 
 export default function BookView() {
   const params: { bookUri: string, categoryId: string, query: string } = useParams()
@@ -18,7 +19,7 @@ export default function BookView() {
   const closeBook = () => {
     const { query, categoryId } = params
     const isSearchPage = Boolean(query)
-    const pathname = `/${isSearchPage ? 'search' : 'category'}/${isSearchPage ? query : categoryId}`
+    const pathname = `/${isSearchPage ? 'search' : 'category'}/${isSearchPage ? customEncodeUri(query) : categoryId}`
     history.replace({ pathname })
   }
 
