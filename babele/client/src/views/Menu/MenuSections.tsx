@@ -32,7 +32,7 @@ export function DeweySection() {
     <>
       <Title size={18} className="sub-title">Definzione Dewey</Title>
       <div className="dewey-container">
-        {(Object.keys(deweyDescription) as DeweyClass[]).map((key: DeweyClass) => <DeweyClassInfo key={key} deweyClass={key} />)}
+        {(Object.keys(deweyDescription) as DeweyClass[]).sort().map((key: DeweyClass) => <DeweyClassInfo key={key} deweyClass={key} />)}
       </div>
     </>
   )

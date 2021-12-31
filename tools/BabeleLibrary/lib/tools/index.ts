@@ -124,10 +124,18 @@ export const pingEndpoint = async (endpoint: string): Promise<boolean> => {
   })
 }
 
+/**
+ * Funzione che trasforma una stringa in un uri con i + al posto degli spazi
+ * @param uri stringa da modificare
+ */
 export const customEncodeUri = (uri: string): string => {
   return replace(/\s+/g, '+', uri)
 }
 
+/**
+ * Funzione che trasforma un uri a cui si sono sostituiti gli spazi con i +, di nuovo nella stringa con gli spazi
+ * @param encodedUri uri con + al posto degli spazi
+ */
 export const customDecodeUri = (encodedUri: string): string => {
   return replace(/\+/g, ' ', encodedUri)
 }
