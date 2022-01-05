@@ -33,13 +33,11 @@ export default function BookDataRowsContainer(props: { data: Observable<{ quad: 
   const endPage = () => (pagination.page * pagination.numElem) + pagination.numElem
 
   useEffect(() => {
-    const subscriber = stream.pipe(
+    stream.pipe(
       filter(({ quad }) => !quad.object.language || quad.object.language === lang),
     ).subscribe(({quad}) => {
       setBookRow(old => [...old, quad])
     })
-
-    return () => subscriber.unsubscribe()
   }, [lang, stream])
 
   return (

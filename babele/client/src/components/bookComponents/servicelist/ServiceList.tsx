@@ -32,8 +32,8 @@ export default function ServiceList({ book }: { book: string }) {
   return (
     <div className='service-list'>
       <InlineList>
-        {Array.from(new Set(data)).map(({service}) => (
-          <li key={service}>
+        {data.map(({service}, idx) => (
+          <li key={service + '-' + idx}>
             <a href={service} title={service} target='_blank' rel="noreferrer">
               <ServiceFavicon service={service} />
             </a>
