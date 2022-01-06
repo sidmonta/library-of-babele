@@ -78,7 +78,6 @@ export function callEndpoint(query: string) {
     format: 'application/json',
   })
   return (endpoint) => {
-    console.log(endpoint, query, fetchQueryString)
     const fetchParams = {
       url: {
         url: endpoint,

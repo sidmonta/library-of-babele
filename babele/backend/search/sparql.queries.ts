@@ -32,6 +32,6 @@ SELECT DISTINCT ?subject WHERE {
     ?subject [] ?object.
     ?object bif:contains "'${query}'".
   }
-  LIMIT 100
+  ORDER BY ?subject LIMIT 100
 `
 export default generalSearchQuery

@@ -17,10 +17,18 @@ export default function SearchResult() {
   useEffect(() => {
     if (query) {
       setBook([])
-      webSocketClient.emit('BOOKSEARCH', { query: customDecodeUri(query) })
+      webSocketClient.emit('BOOKSEARCH', { query: customDecodeUri(query), page: 0 })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query])
+
+  useEffect(() => {
+    const id = setTimeout(() => {
+      webSocketClient.emit('BOOKSEARCH', { query: customDecodeUri(query), page: 1 })
+    }, 10000)
+
+    return () => clearTimeout(id)
+  }, [])
 
   return (
     <div className="page-container">

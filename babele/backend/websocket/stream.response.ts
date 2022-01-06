@@ -14,7 +14,7 @@ import {
   filter,
   ignoreElements,
   map,
-  mergeMap,
+  mergeMap, skip,
   startWith,
   switchMap,
   take,
@@ -68,8 +68,7 @@ export function searchFromCache(cache) {
     const call = callEndpoint(payload.query)
     try {
       const endpoints$ = fromPromise(allitem(cache)(CACHE_KEY_ENDPOINT_LIST)) as Observable<string>
-      endpoints$.subscribe(console.log)
-      return endpoints$.pipe(switchMap(from), mergeMap(call), distinct())
+      return endpoints$.pipe(switchMap(from), mergeMap(call), distinct(), skip(payload.page * 50), take(50))
     } catch (err) {
       console.error(err)
       return throwError(err)
@@ -139,8 +138,8 @@ export function getBookData(cache) {
       crawler.run(uri)
 
       // Merge of all different type of response
-      return merge(of(firstService), bookService$, bookData$, newBookClassified$)
-      // return merge(of(firstService), bookService$, bookData$, )
+      // return merge(of(firstService), bookService$, bookData$, newBookClassified$)
+      return merge(of(firstService), bookService$, bookData$, )
       // return [bookData$, bookService$, newBookClassified$]
     }
     return throwError(new Error('No URI found for crawling'))

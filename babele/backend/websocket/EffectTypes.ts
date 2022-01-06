@@ -57,7 +57,7 @@ export interface WSBookDataIn extends Event {
  */
 export interface WSBookSearch extends Event {
   type: Type.BOOKSEARCH
-  payload: { query: string }
+  payload: { query: string, page?: number }
 }
 
 export interface WSBookDataOut extends Event {}
