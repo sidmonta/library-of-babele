@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import { contrastingColor } from './AtomBook-real';
-import { generateColorFromString } from '@sidmonta/babelelibrary/build/tools';
-
 
 // source of animation https://codepen.io/HighFlyer/pen/LaXrgV
 export const Container = styled.div`
