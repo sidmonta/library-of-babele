@@ -4,7 +4,7 @@ import {Type} from "./EffectTypes";
 import {
   bufferCount,
   concatMap, filter,
-  mapTo, mergeMap, scan,
+  mapTo,
   shareReplay, startWith, take, tap,
 } from "rxjs/operators";
 
@@ -14,7 +14,7 @@ export default function <A>(method: (event: Event) => Observable<A>) {
 
   return (event: Event, event$: Observable<Event>) => {
     const resumeEv$ = merge(
-      event$.pipe(matchEvent(Type.CONTINUE), mapTo(true)),
+      event$.pipe(matchEvent(Type.BOOKLIST), mapTo(true)),
       resume$
     )
 

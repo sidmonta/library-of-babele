@@ -68,7 +68,7 @@ export function searchFromCache(cache) {
     const call = callEndpoint(payload.query)
     try {
       const endpoints$ = fromPromise(allitem(cache)(CACHE_KEY_ENDPOINT_LIST)) as Observable<string>
-      return endpoints$.pipe(switchMap(from), mergeMap(call), distinct(), skip(payload.page * 50), take(50))
+      return endpoints$.pipe(switchMap(from), mergeMap(call), distinct(), tap(console.log), skip((payload?.page || 0) * 50), tap(console.log), take(50))
     } catch (err) {
       console.error(err)
       return throwError(err)
