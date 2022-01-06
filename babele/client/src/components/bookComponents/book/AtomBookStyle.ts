@@ -12,8 +12,8 @@ export const Book = styled.div`
   width: 130px;
   height: 180px;
   margin: 5% auto;
-  border-radius: 0px 10px 10px 0px;
-  box-shadow: 5px 5px 8px 0px rgba(151, 146, 153, 0.6);
+  border-radius: 0 10px 10px 0;
+  box-shadow: 5px 5px 8px 0 rgba(151, 146, 153, 0.6);
   font-weight: 400;
   transform-style: preserve-3d;
   transition: transform 0.5s;
@@ -25,7 +25,7 @@ export const Book = styled.div`
 
 export const Front = styled.div`
   transform-style: preserve-3d;
-  transform-origin: 0% 50%;
+  transform-origin: 0 50%;
   transition: transform 0.5s;
   transform: translate3d(0, 0, 20px);
   z-index: 10;
@@ -43,9 +43,12 @@ export const Front = styled.div`
   }
 `;
 
-export const FrontCover = styled.div`
-  background: ${({ color }) => color};
-  color: #${(props) => contrastingColor(props.color?.replace('#', '') || 'FF0000')};
+export const FrontCover = styled.div.attrs(props => ({
+  style: {
+    background: props.color,
+    color: contrastingColor(props.color?.replace('#', '') || 'FF0000')
+  }
+}))`
   box-shadow: inset 4px 0 10px rgb(0 0 0 / 10%);
   position: absolute;
   width: 130px;
@@ -72,12 +75,15 @@ export const FrontCover = styled.div`
   }
 `;
 
-export const LeftSide = styled.div`
+export const LeftSide = styled.div.attrs(props => ({
+  style: {
+    background: props.color + 'd1',
+    color: contrastingColor(props.color?.replace('#', '') || 'FF0000')
+  }
+}))`
   width: 40px;
   left: -20px;
   height: 100%;
-  background: ${({ color }) => color + 'd1'};
-  color: #${(props) => contrastingColor(props.color?.replace('#', '') || 'FF0000')};
   transform: rotate3d(0, 1, 0, -90deg);
   position: absolute;
   display: block;
