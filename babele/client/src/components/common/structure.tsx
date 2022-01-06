@@ -24,3 +24,10 @@ export const InlineList = styled.ul`
   display: flex;
   gap: 1em;
 `
+
+export const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+`

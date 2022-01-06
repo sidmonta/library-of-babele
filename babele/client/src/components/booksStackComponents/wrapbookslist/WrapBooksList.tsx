@@ -1,16 +1,11 @@
-import React, {createRef, useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import { useWebSocket, useWSData } from '../../../context/websocket'
 import { DeweyCategory } from '@sidmonta/babelelibrary/build/types'
 import BookList from '../booklist/BookList'
 import BookLoader from "../../common/BookLoader";
 import styled from "styled-components";
-
-const LoaderContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-`
+import {LoaderContainer} from "../../common/structure";
+import {useInterceptionPagination} from "../../../services";
 
 const SummaryInfo = styled.div`
   display: flex;
@@ -27,8 +22,7 @@ export default function WrapBookList({ deweySelect }: { deweySelect: DeweyCatego
   const webSocketClient = useWebSocket()
   const deweyId = deweySelect?.dewey
   const [books, setBooks] = useWSData<{book: string, totItems: number}>('BOOKLIST_' + deweyId)
-  const loaderDom = createRef<HTMLDivElement>()
-  const [currentPage, setCurrentPage] = useState(0)
+  const [loaderDom, currentPage, setCurrentPage] = useInterceptionPagination({ data: books, numElem: 10 })
 
   useEffect(() => {
     // Nuovo dewey da visualizzare
@@ -47,29 +41,6 @@ export default function WrapBookList({ deweySelect }: { deweySelect: DeweyCatego
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deweyId, currentPage])
-
-  useEffect(() => {
-    const options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.25
-    };
-
-    const handleIntersect: IntersectionObserverCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setCurrentPage((prev) => prev + 1)
-        }
-      });
-    }
-
-    const observer = new IntersectionObserver(handleIntersect, options);
-    if (loaderDom.current) {
-      observer.observe(loaderDom.current);
-    }
-
-    return () => observer.disconnect()
-  }, [loaderDom])
 
   return (
     <div>

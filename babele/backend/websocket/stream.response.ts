@@ -28,7 +28,6 @@ import { CACHE_KEY_ENDPOINT_LIST, callEndpoint } from '../search/endpoint-list'
 import * as N3 from 'n3'
 import { filterByPing, formatDocument, LODDocument } from '@sidmonta/babelelibrary/build/stream'
 import { ClassifierAlgorithms } from '@sidmonta/classifier/lib/ClassifierFactory'
-// import { logger } from '@marblejs/core'
 
 type Quad = N3.Quad
 // Inizializzazione del classificatore
@@ -68,7 +67,7 @@ export function searchFromCache(cache) {
     const call = callEndpoint(payload.query)
     try {
       const endpoints$ = fromPromise(allitem(cache)(CACHE_KEY_ENDPOINT_LIST)) as Observable<string>
-      return endpoints$.pipe(switchMap(from), mergeMap(call), distinct(), tap(console.log), skip((payload?.page || 0) * 50), tap(console.log), take(50))
+      return endpoints$.pipe(switchMap(from), mergeMap(call), distinct(), skip((payload?.page || 0) * 50), take(50))
     } catch (err) {
       console.error(err)
       return throwError(err)
