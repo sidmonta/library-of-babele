@@ -10,6 +10,7 @@ import {Quad} from "../../../services/models";
 import SelectLang from "../selectlang/SelectLang";
 import BookDataRowsContainer from "../bookdatarow/BookDataRowsContainer";
 import {AiOutlineCloseCircle} from "react-icons/ai";
+import {getID} from "@sidmonta/babelelibrary/build/lods";
 
 export interface WrapBookProps {
   book: string
@@ -50,6 +51,22 @@ const BookContainer = styled.div`
     align-content: center;
     justify-content: center;
     align-items: center;
+
+    border: 2px solid #333;
+    border-left: 0;
+    margin-bottom: calc(2rem * 1.618);
+    padding: 1rem 1rem 2rem 0;
+    position: relative;
+
+    .id {
+      background-color: antiquewhite;
+      bottom: 100%;
+      color: #333;
+      left: 0;
+      margin-bottom: -0.25em;
+      padding: 0 0.5em 0 0;
+      position: absolute;
+    }
   }
   .book-service {
     grid-column: 1 / -1;
@@ -58,6 +75,7 @@ const BookContainer = styled.div`
     align-content: center;
     justify-content: flex-start;
     overflow-x: scroll;
+    overflow-y: hidden;
   }
   .book-data {
     grid-row-start: 4;
@@ -100,6 +118,9 @@ export default function WrapBook({ book, onClose }: WrapBookProps) {
         <MediaBook data={data$} />
       </div>
       <div className="book-title">
+        <span className="id">
+          {getID(book)}
+        </span>
         <h2>{bookTitle}</h2>
       </div>
       <div className="select-lang">

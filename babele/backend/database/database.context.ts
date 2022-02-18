@@ -10,7 +10,7 @@ import { WebSocketClientConnection } from '@marblejs/websockets'
  * Creo l'istanza per il database SQLite3
  */
 export const database = new BetterSqlite3(resolve(process.env.DATABASE_PATH))
-
+console.log(process.env.DATABASE_PATH)
 /* Genero il MarbleJS Context per l'istanza del database */
 export const databaseToken = createContextToken<Database>('database')
 export const d = pipe(

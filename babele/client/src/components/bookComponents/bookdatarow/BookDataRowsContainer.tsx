@@ -15,22 +15,15 @@ export default function BookDataRowsContainer(props: { data: Observable<{ quad: 
     numElem: 40
   })
 
-  const nextPage = () => {
+  const nextPage = (page: number) => {
     setPagination({
       ...pagination,
-      page: pagination.page + 1
-    })
-  }
-
-  const prevPage = () => {
-    setPagination({
-      ...pagination,
-      page: pagination.page - 1
+      page
     })
   }
 
   const startPage = () => pagination.page * pagination.numElem
-  const endPage = () => (pagination.page * pagination.numElem) + pagination.numElem
+  const endPage = () => (pagination.page * pagination.numElem) + pagination.numElem - 1
 
   useEffect(() => {
     stream.pipe(
@@ -40,10 +33,16 @@ export default function BookDataRowsContainer(props: { data: Observable<{ quad: 
     })
   }, [lang, stream])
 
+  const pages = () => {
+    return <div>
+      {Array.from(Array(Math.trunc(bookRow.length / pagination.numElem) + 1).keys())
+        .map((ind) => <input onChange={() => nextPage(ind)} type="radio" key={ind} checked={ind === pagination.page} name="pages" />)}
+    </div>
+  }
+
   return (
     <div>
-      <button onClick={nextPage}>Next Page</button>
-      {pagination.page > 0 && <button onClick={prevPage}>Prev Page</button> }
+      {pages()}
       <ul className="bookdata-list-wrapper">
         {bookRow.slice(startPage(), endPage()).map((d, index) => <li key={index}><BookDataRow data={d} /></li>)}
       </ul>

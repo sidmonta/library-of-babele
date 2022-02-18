@@ -75,6 +75,10 @@
       "allowedCategories": [ "production" ]
     },
     {
+      "name": "brain.js",
+      "allowedCategories": [ "production" ]
+    },
+    {
       "name": "browser-mime",
       "allowedCategories": [ "production" ]
     },
