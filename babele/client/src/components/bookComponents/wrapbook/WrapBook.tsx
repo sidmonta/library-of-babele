@@ -74,7 +74,9 @@ const BookContainer = styled.div`
     display: flex;
     align-content: center;
     justify-content: flex-start;
-    overflow-x: scroll;
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
     overflow-y: hidden;
   }
   .book-data {
