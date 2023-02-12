@@ -66,6 +66,7 @@ common/autoinstallers/*/.npmrc
 
 .idea
 .vscode
+.fleet
 .run
 
 tools/Classifier/lib/
