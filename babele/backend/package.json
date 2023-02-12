@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-redis": "redis-server /opt/homebrew/etc/redis.conf",
+    "start-redis": "redis-server /opt/homebrew/etc/redis.conf || true",
     "start-server": "env-cmd -f ../../.env.development.local ts-node server.ts",
     "start": "concurrently \"npm:start-*\" &",
     "dev": "concurrently \"npm:start-redis\" \"env-cmd -f ../../.env.development.local ts-node-dev server.ts\""

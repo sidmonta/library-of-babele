@@ -1,4 +1,23 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -38,27 +57,30 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var ClassifierFactory_1 = __importDefault(require("../ClassifierFactory"));
 var featuresF = __importStar(require("../Features"));
-// Reset name file in process argument
+// Tolgo dalla lista degli argomenti il nome del file e l'esecutore
 var args = process.argv.slice(2);
+/**  Vedi: {@type: ClassifyOpt } */
+// Gli argomenti pari sono i nomi, i dispari i valori
 var dbPath = args[1];
 var algorithm = args[3];
 var featureFun = args[5];
 var data = JSON.parse(args[7]);
+// Istanzio il classificatore con le informazioni passate come argomento
 var classifier = ClassifierFactory_1.default.create(algorithm, {
     database: {
         dbPath: dbPath
     }
 });
+// TODO: Assegnare le probabilità assunta in base al dominio (ontologia)
+/**
+ * Serve per poter usare async/await
+ *
+ * @param {unknown} data Documento da classificare
+ * @returns {Promise<void>} Nulla
+ */
 function classify(data) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, result;
@@ -77,11 +99,13 @@ function classify(data) {
                 case 3: return [4 /*yield*/, classifier.classify(data)];
                 case 4:
                     result = _b.sent();
-                    process.send(result);
+                    classifier.close(); // Chiudo il database
+                    process.send(result); // Comunico al processo padre il risultato
                     process.exit();
                     return [2 /*return*/];
             }
         });
     });
 }
+// Lancio la classificazione
 classify(data);

@@ -19,7 +19,7 @@ import { resolve } from 'path'
   }
 })()
 
-describe('Check stream good', async () => {
+describe('Check stream good', () => {
   const classify$ = classify<string>({
     dbPath: resolve(__dirname, './test.db'),
     algorithm: 'Fisher',
@@ -31,7 +31,7 @@ describe('Check stream good', async () => {
   }).unsubscribe()
 })
 
-describe('Check stream bad', async () => {
+describe('Check stream bad', () => {
   const classify$ = classify<string>({
     dbPath: resolve(__dirname, './test.db'),
     algorithm: 'Fisher',
@@ -43,7 +43,7 @@ describe('Check stream bad', async () => {
   }).unsubscribe()
 })
 
-describe('Check stream from stream', async () => {
+describe('Check stream from stream',  () => {
   const classify$ = classify<string>({
     dbPath: resolve(__dirname, './test.db'),
     algorithm: 'Fisher',
@@ -72,7 +72,6 @@ describe('Check stream from stream', async () => {
     })
   ).subscribe(result => {
     const [id, res] = result
-
     assert.equal(res, map[id])
   })
 })

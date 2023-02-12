@@ -51,7 +51,7 @@ export async function featureWthMetadata<E extends { metadata: { [a: string]: st
   componentToParse.push(content)
   for (const wordsValue of componentToParse) {
     const wordsOnDesc = await getWords(wordsValue)
-    for (const wd of wordsOnDesc.keys()) {
+    for (const wd in wordsOnDesc.keys()) {
       words.set(wd, 1)
     }
   }

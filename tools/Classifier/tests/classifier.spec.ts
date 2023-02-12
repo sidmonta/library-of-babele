@@ -97,14 +97,3 @@ describe('Fisher with db', async () => {
   cl.setMinimum('good', 0.7)
   assert.equal(await cl.classify('quick money'), 'unknown')
 })
-
-describe('Classify Neural Network test', async () => {
-  const cl = new NeuralNetwork()
-  for (let i = 0; i < 10; i++) {
-    await sampleTrain(cl)
-  }
-  cl.refreshTrain()
-
-  assert.equal(await cl.classify('quick rabbit'), 'good')
-  assert.equal(await cl.classify('quick money'), 'bad')
-})

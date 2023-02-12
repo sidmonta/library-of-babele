@@ -67,6 +67,7 @@ export function useInterceptionPagination(props?: {data: unknown[], numElem: num
     }
 
     return () => observer.disconnect()
+    // eslint-disable-next-line
   }, [loaderDom, props])
 
   return [loaderDom, page, setPage]
