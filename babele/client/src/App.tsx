@@ -1,20 +1,20 @@
-import React  from 'react'
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
-import './App.css'
-import Home from './views/Home/Home'
-import CategoryPage from './views/CategoryPage/CategoryPage'
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import './App.css';
+import Home from './views/Home/Home';
+import CategoryPage from './views/CategoryPage/CategoryPage';
 
-import NavMenu from './views/Menu/NavMenu'
-import SearchResult from './views/SearchResult/SearchResult'
-import SearchBar from './components/common/searchbar/SearchBar'
-import { ThemeContext, Themes } from './context/theme'
-import Title from "./components/common/title/title";
-// import {useNewBookHook} from "./store/books";
+import NavMenu from './views/Menu/NavMenu';
+import SearchResult from './views/SearchResult/SearchResult';
+import SearchBar from './components/common/searchbar/SearchBar';
+import { ThemeContext, Themes } from './context/theme';
+import Title from './components/common/title/title';
+import { useNewBookHook } from './store/books';
 
-const appTheme = process.env.REACT_APP_THEME as Themes
+const appTheme = process.env.REACT_APP_THEME as Themes;
 
 function App() {
-  // const newbooks = useNewBookHook(console.log)
+  useNewBookHook(console.log);
   return (
     <ThemeContext.Provider value={appTheme}>
       <div className="App">
@@ -44,7 +44,7 @@ function App() {
         </Router>
       </div>
     </ThemeContext.Provider>
-  )
+  );
 }
 
-export default App
+export default App;
