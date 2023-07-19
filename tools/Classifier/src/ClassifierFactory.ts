@@ -32,10 +32,9 @@ export default class ClassifierFactory {
    */
   static create<E>(algorithm: ClassifierAlgorithms, options: ClassifierOptions<E>): NaiveBayes<E> | Fisher<E> {
     switch (algorithm) {
-      case 'NaiveBayes':
-        return new NaiveBayes<E>(options)
       case 'Fisher':
         return new Fisher<E>(options)
+      case 'NaiveBayes':
       default:
         return new NaiveBayes<E>(options)
     }

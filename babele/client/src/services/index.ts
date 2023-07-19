@@ -1,5 +1,5 @@
 import { useLocation, useHistory } from 'react-router-dom'
-import {createRef, Dispatch, RefObject, SetStateAction, useEffect, useState} from "react";
+import { createRef, Dispatch, RefObject, SetStateAction, useEffect, useState } from "react"
 
 type Method = 'GET' | 'POST' | 'PUT'
 
@@ -41,7 +41,7 @@ export function useRedirect() {
   }
 }
 
-export function useInterceptionPagination(props?: {data: unknown[], numElem: number} | undefined): [RefObject<HTMLDivElement>, number, Dispatch<SetStateAction<number>>] {
+export function useInterceptionPagination(props?: { data: unknown[], numElem: number } | undefined): [RefObject<HTMLDivElement>, number, Dispatch<SetStateAction<number>>] {
   const loaderDom = createRef<HTMLDivElement>()
   const [page, setPage] = useState(0)
 
@@ -50,20 +50,19 @@ export function useInterceptionPagination(props?: {data: unknown[], numElem: num
       root: null,
       rootMargin: "0px",
       threshold: 1
-    };
+    }
 
     const handleIntersect: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
-        console.log(props?.data.length, entry.isIntersecting, entry.intersectionRatio)
         if (entry.isIntersecting && entry.intersectionRatio > 0.5 && (!props || (props.data.length >= (props.numElem || 10) * page))) {
           setPage((prev) => prev + 1)
         }
-      });
+      })
     }
 
-    const observer = new IntersectionObserver(handleIntersect, options);
+    const observer = new IntersectionObserver(handleIntersect, options)
     if (loaderDom.current) {
-      observer.observe(loaderDom.current);
+      observer.observe(loaderDom.current)
     }
 
     return () => observer.disconnect()

@@ -55,16 +55,8 @@
       "allowedCategories": [ "production" ]
     },
     {
-      "name": "@typescript-eslint/eslint-plugin",
-      "allowedCategories": [ "production" ]
-    },
-    {
-      "name": "@typescript-eslint/parser",
-      "allowedCategories": [ "production" ]
-    },
-    {
       "name": "axios",
-      "allowedCategories": [ "libraries", "tools" ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "babel-jest",
@@ -95,30 +87,6 @@
       "allowedCategories": [ "production" ]
     },
     {
-      "name": "eslint",
-      "allowedCategories": [ "production" ]
-    },
-    {
-      "name": "eslint-config-standard",
-      "allowedCategories": [ "production" ]
-    },
-    {
-      "name": "eslint-plugin-import",
-      "allowedCategories": [ "production" ]
-    },
-    {
-      "name": "eslint-plugin-node",
-      "allowedCategories": [ "production" ]
-    },
-    {
-      "name": "eslint-plugin-promise",
-      "allowedCategories": [ "production" ]
-    },
-    {
-      "name": "eslint-plugin-standard",
-      "allowedCategories": [ "production" ]
-    },
-    {
       "name": "express",
       "allowedCategories": [ "tools" ]
     },
@@ -128,11 +96,11 @@
     },
     {
       "name": "fast-xml-parser",
-      "allowedCategories": [ "libraries", "tools" ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "form-data",
-      "allowedCategories": [ "libraries", "tools" ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "fp-ts",
@@ -152,11 +120,11 @@
     },
     {
       "name": "n3",
-      "allowedCategories": [ "libraries", "production", "tools" ]
+      "allowedCategories": [ "libraries", "production" ]
     },
     {
       "name": "node-ts",
-      "allowedCategories": [ "libraries", "tools" ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "node-typescript",
@@ -168,11 +136,11 @@
     },
     {
       "name": "ramda",
-      "allowedCategories": [ "libraries", "production", "tools" ]
+      "allowedCategories": [ "libraries", "production" ]
     },
     {
       "name": "rdfxml-streaming-parser",
-      "allowedCategories": [ "libraries", "tools" ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "react",
@@ -212,7 +180,7 @@
     },
     {
       "name": "rxjs",
-      "allowedCategories": [ "libraries", "production", "tools" ]
+      "allowedCategories": [ "libraries", "production" ]
     },
     {
       "name": "stopword",
@@ -228,7 +196,7 @@
     },
     {
       "name": "ts-loader",
-      "allowedCategories": [ "libraries", "tools" ]
+      "allowedCategories": [ "libraries" ]
     },
     {
       "name": "ts-node",
@@ -244,7 +212,7 @@
     },
     {
       "name": "typescript",
-      "allowedCategories": [ "libraries", "production", "tools" ]
+      "allowedCategories": [ "libraries", "production" ]
     },
     {
       "name": "web-vitals",

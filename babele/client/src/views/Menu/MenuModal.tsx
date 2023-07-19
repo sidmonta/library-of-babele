@@ -1,9 +1,9 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import {AiOutlineHome} from "react-icons/all";
-import Title from "../../components/common/title/title";
-import {AbstractSection, DeweySection, LinkSection} from "./MenuSections";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { AiOutlineHome } from 'react-icons/ai';
+import Title from '../../components/common/title/title';
+import { AbstractSection, DeweySection, LinkSection } from './MenuSections';
 
 const ModalContainer = styled.div`
   opacity: ${(props: MenuModalProps) => (props.open ? 1 : 0)};
@@ -17,12 +17,12 @@ const ModalContainer = styled.div`
   height: 98vh;
   align-items: center;
   justify-content: center;
-  background-color: #7FFFD3;
+  background-color: #7fffd3;
   transform: translate(-50%, -50%);
   transition: opacity 3s;
   z-index: 9;
   overflow-y: auto;
-`
+`;
 
 const Grid = styled.div`
   display: grid;
@@ -71,19 +71,19 @@ const Grid = styled.div`
     grid-row: 4 / 5;
     grid-column: 2 / -1;
   }
-`
+`;
 
 export type MenuModalProps = {
-  open: boolean
-  emitClose?: () => void
-}
+  open: boolean;
+  emitClose?: () => void;
+};
 
 export default function MenuModal(props: MenuModalProps) {
   const handleLinkClick = () => {
     if (props.emitClose) {
-      props.emitClose()
+      props.emitClose();
     }
-  }
+  };
 
   return (
     <ModalContainer open={props.open}>
@@ -100,12 +100,12 @@ export default function MenuModal(props: MenuModalProps) {
           <AbstractSection />
         </div>
         <div className="infoDewey">
-        <DeweySection />
+          <DeweySection />
         </div>
         <div className="links">
           <LinkSection />
         </div>
       </Grid>
     </ModalContainer>
-  )
+  );
 }

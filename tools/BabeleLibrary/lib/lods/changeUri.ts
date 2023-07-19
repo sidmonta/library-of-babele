@@ -18,7 +18,7 @@ export type control = (is?: string, change?: ChangeFn) => string | control
  * @param is valore che l'uri deve contenere per poter essere modificato
  * @param change Funzione che modifica l'URI
  */
-export const createCheck = (is: string, change: ChangeFn): ChangeFn  => ifElse(includes(is), change, identity)
+export const createCheck = (is: string, change: ChangeFn): ChangeFn => ifElse(includes(is), change, identity)
 
 // Wikidata
 export const checkWikidata: ChangeFn = createCheck('wikidata', pipe(
@@ -53,11 +53,11 @@ function baseChangeURI() {
       return control
     } else if (is) { // Se ho passato solo il criterio allora eseguo i controlli usando il criterio come URI
       // @ts-ignore
-      return pipe(...aggregate)(is)
+      return pipe(...aggregate)(is) as control
     }
     // Altrimenti ritorno una funzione che eseguirà tutti i criteri quando gli verrà passato una URI
     // @ts-ignore
-    return pipe(...aggregate)
+    return pipe(...aggregate) as control
   }
   return control
 }
