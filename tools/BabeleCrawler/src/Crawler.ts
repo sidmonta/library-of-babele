@@ -124,7 +124,7 @@ export default class Crawler {
    * Costruttore del Crawler
    * @param [checkUri] funzione opzionale che trasforma le URI nella versione per ritornare il file RDF
    */
-  constructor (checkUri: CheckURI = identity) {
+  constructor(checkUri: CheckURI = identity) {
     // Funzione che si fa la fetch al servizio LOD per una determinata URI
     // Prima applica le modifiche all'URI per il servizio richiesto
     const fetchURI = pipe(checkUri, Rx.fetchSPARQL)
@@ -141,8 +141,8 @@ export default class Crawler {
       const id = getID(uri) // Recupero l'identificativo della risorsa
       this.historyID.add(id) // Mi salvo l'identificativo cercato per non cercarlo di nuovo successivamente.
       const fetch$ = fetchURI(uri).pipe(
-        filterQuadByIncludedService(id), // Filtro le triple solo che appartengono all'identificativo del soggetto
-        filter(filtQuad) // Filtro le triple che non sono vuote.
+        // filterQuadByIncludedService(id), // Filtro le triple solo che appartengono all'identificativo del soggetto
+        filter(filtQuad), // Filtro le triple che non sono vuote.
       )
 
       /**
@@ -151,8 +151,8 @@ export default class Crawler {
       fetch$
         .pipe(delay(100)) // Per ovviare al fatto che prima voglio si attivi la sottoscrizione di this.download$
         .subscribe(
-          _ => {}, // Ad ogni nuova tripla non faccio nulla.
-          _ => {}, // Lo stesso se viene generato un errore
+          _ => { }, // Ad ogni nuova tripla non faccio nulla.
+          _ => { }, // Lo stesso se viene generato un errore
           () => {
             // Il sameAs è analizzato, allora lo tolgo dal conteggio
             this.counterSameAs--
@@ -183,6 +183,8 @@ export default class Crawler {
         this.sameAs.next(sameAs) // Genero un nuovo evento nello stream dei sameAs
       }
 
+      // console.log(quad)
+
       // Aggiungo le informazioni al quadUpcoming e allo store di triple
       this.quadUpcoming.next(quad)
       this.quadStore.addQuad(quad)
@@ -193,7 +195,7 @@ export default class Crawler {
    * Incomincia a cercare tutte le triple associate a questa URI anche su altre banche dati
    * @param uri uri da cui partire per la ricerca
    */
-  run (uri: URI) {
+  run(uri: URI) {
     if (!this.sameDomain(uri)) {
       this.sameAs.next(uri)
     }
@@ -206,7 +208,7 @@ export default class Crawler {
    * @param {string} [fil] regex per filtrare le query che arrivano e ottenere solo quelle desiderate.
    * Parametro opzionale
    */
-  public onNewNode (callback: (v: Quad) => void, fil?: string): void {
+  public onNewNode(callback: (v: Quad) => void, fil?: string): void {
     let filterQuad = fil ? Lod.checkQuad(fil) : _ => true
     this.quadUpcoming$
       .pipe(filter((q: Quad) => q && filterQuad(q)))
@@ -217,7 +219,7 @@ export default class Crawler {
    * Metodo/evento per essere notificati ogni qual volta si è trovata una nuova base dati LOD
    * @param {(url: string) => void)} callback funzione da eseguire ogni qualvolta si è trovata una nuova banca dati da scansionare
    */
-  public onNewSource (callback: (url: string) => void): void {
+  public onNewSource(callback: (url: string) => void): void {
     this.sameAs$.subscribe(callback)
   }
 
@@ -225,7 +227,7 @@ export default class Crawler {
    * Ritorna lo stream in cui ogni evento è una tripla trovata durante la ricerca.
    * @param fil Filtra le triple solo se contengono il valore di fil
    */
-  public getNewNodeStream (fil?: string) {
+  public getNewNodeStream(fil?: string) {
     let filterQuad = fil ? Lod.checkQuad(fil) : _ => true
     return this.quadUpcoming$.pipe(filter((q: Quad) => q && filterQuad(q)))
   }
@@ -233,14 +235,14 @@ export default class Crawler {
   /**
    * Ritorna lo stream per le triple <sameAs> che corrispondono ai servizi analizzati durante la navigazione
    */
-  public getNewSourceStream () {
+  public getNewSourceStream() {
     return this.sameAs$
   }
 
   /**
    * Interrompe il crawler
    */
-  public end (): void {
+  public end(): void {
     this.subscribeDownload.unsubscribe()
     this.quadUpcoming.unsubscribe()
     this.sameAs.unsubscribe()
@@ -249,7 +251,7 @@ export default class Crawler {
   /**
    * Re-inizializza il crawler resettando i vari registri di informazioni
    */
-  public clear (): void {
+  public clear(): void {
     this.quadStore = new Store()
     this.historyID = new Set<string>()
     this.cachePlugin.flush()
@@ -260,7 +262,7 @@ export default class Crawler {
    * Imposta il plugin di cache da utilizzare durante la navigazione
    * @param plugin plugin per la cache
    */
-  public setCache (plugin: Services.CachePlugin<string, never>): void {
+  public setCache(plugin: Services.CachePlugin<string, never>): void {
     this.cachePlugin = plugin
   }
 
@@ -269,7 +271,7 @@ export default class Crawler {
    * @param domain dominio che si sta analizzando
    * @returns {boolean} se ho già analizzato qulla URI
    */
-  private sameDomain (domain: URI): boolean {
+  private sameDomain(domain: URI): boolean {
     let dom = extractDomain(domain) // estrae il dominio di dall'URI
     if (isNil(dom) || this.cachePlugin.has(dom)) {
       return true

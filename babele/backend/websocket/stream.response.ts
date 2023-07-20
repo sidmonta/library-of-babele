@@ -12,15 +12,15 @@ import {
   concatMap,
   distinct, distinctUntilChanged,
   filter,
-  ignoreElements,
   map,
+  mergeAll,
   mergeMap, skip,
   startWith,
   switchMap,
   take,
   tap,
 } from 'rxjs/operators'
-import { merge, Observable, of, throwError, timer, from } from 'rxjs'
+import { merge, Observable, of, throwError, timer, from, scheduled, asyncScheduler } from 'rxjs'
 import Crawler from '@sidmonta/babelecrawler'
 import classify from '@sidmonta/classifier/lib/fp'
 import { featureWthMetadata } from '@sidmonta/classifier/lib/Features'
@@ -95,11 +95,7 @@ export function getBookData(cache) {
           distinctUntilChanged((a, b) => a.object.value === b.object.value),
           map((quad: Quad) =>
             ({ type: generateType(Type.BOOKDATA), payload: { quad } })
-          ),
-          concatMap(val => timer(400).pipe(
-            ignoreElements(),
-            startWith(val)
-          ))
+          )
         )
 
       // Stream of service where info from
@@ -140,7 +136,7 @@ export function getBookData(cache) {
 
       // Merge of all different type of response
       // return merge(of(firstService), bookService$, bookData$, newBookClassified$)
-      return merge(of(firstService), bookService$, bookData$, newBookClassified$)
+      return scheduled([of(firstService), bookService$, bookData$, newBookClassified$], asyncScheduler).pipe(mergeAll())
       // return [bookData$, bookService$, newBookClassified$]
     }
     return throwError(new Error('No URI found for crawling'))

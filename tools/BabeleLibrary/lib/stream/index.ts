@@ -25,7 +25,7 @@ export interface FetchResponse {
  * @param dataEventName nome del metodo dello stream per l'arrivo di nuovi dati. Di default 'data'
  * @returns {Observable<any>} Observable dello stream
  */
-export function fromStream (
+export function fromStream(
   stream: any,
   finishEventName = 'end',
   dataEventName = 'data'
@@ -33,15 +33,15 @@ export function fromStream (
   stream.pause()
 
   return new Observable(observer => {
-    function dataHandler (data: any) {
+    function dataHandler(data: any) {
       observer.next(data)
     }
 
-    function errorHandler (err: any) {
+    function errorHandler(err: any) {
       observer.error(err)
     }
 
-    function endHandler () {
+    function endHandler() {
       observer.complete()
     }
 
@@ -64,7 +64,7 @@ export function fromStream (
  * @param url Configurazione per eseguire la chiamata con axios
  * @param params configurazione aggiuntiva che viene appesa alla risposta.
  */
-export function fetchContent ({ url, params }: {
+export function fetchContent({ url, params }: {
   url: AxiosRequestConfig,
   params?: unknown
 }): Observable<FetchResponse> {
@@ -96,7 +96,7 @@ const checkContentType = (data: FetchResponse) =>
  * @param {string} url uri del record da cui ottenere l'RDF
  * @returns {Observable<Quad>} Observable di quad
  */
-export function fetchSPARQL (url: string): Observable<Quad> {
+export function fetchSPARQL(url: string): Observable<Quad> {
   return fetchContent({
     url: {
       url: allCheck(url),
@@ -108,9 +108,9 @@ export function fetchSPARQL (url: string): Observable<Quad> {
   }).pipe(
     filter(checkContentType), // Filtra solo la chiamata con il corretto ContentType
     map(path(['body'])), // Estrapola il body della risposta
-    switchMap((data: unknown) =>
-      QuadFactory.generateFromString(data as string, true) // Genera le triple a partire dalla risposta
-    ),
+    switchMap((data: unknown) => {
+      return QuadFactory.generateFromString(data as string, true) // Genera le triple a partire dalla risposta
+    }),
     // Se c'è un errore genera una tripla vuota
     catchError((_: AjaxResponse) => of(DataFactory.quad(
       DataFactory.blankNode(),
@@ -124,7 +124,7 @@ export function fetchSPARQL (url: string): Observable<Quad> {
  * Implementa un operatore per Rxjs che esegue un filtro asyncrono sui dati che arrivano dallo stream
  * @param predicate funzione che funge da predicato per la valutazione del dato
  */
-export function asyncFilter<T> (predicate: (value: T, index: number) => Promise<boolean>): MonoTypeOperatorFunction<T> {
+export function asyncFilter<T>(predicate: (value: T, index: number) => Promise<boolean>): MonoTypeOperatorFunction<T> {
   let inx = 0
   return pipe(
     concatMap((data: T) => from(predicate(data, inx++)).pipe(map((valid: boolean) => ({ valid, data })))),

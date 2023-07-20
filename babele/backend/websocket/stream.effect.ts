@@ -1,11 +1,11 @@
 import { WsEffect } from '@marblejs/websockets'
 import { act, Event, matchEvent } from '@marblejs/core'
-import {catchError, map} from 'rxjs/operators'
+import { catchError, map } from 'rxjs/operators'
 import { pipe } from 'fp-ts/lib/function'
 import { reply } from '@marblejs/messaging'
 import { Observable, of } from 'rxjs'
 import { redisClient } from '../cache/redis.context'
-import {Type, WSBookDataIn, WSBookDataOut, WSBookList, WSBookListOut} from './EffectTypes'
+import { Type, WSBookDataIn, WSBookDataOut, WSBookList, WSBookListOut } from './EffectTypes'
 import { getBookListFromCache, searchFromCache, getBookData } from './stream.response'
 // import pagination from "./pagination";
 
@@ -66,12 +66,12 @@ export const bookData$ = (event$: Observable<Event>) => {
     act((event: WSBookDataIn) => {
       return pipe(
         getBkData(event),
-        map((eventOutData: WSBookDataOut | never) =>
-          reply(event)({
+        map((eventOutData: WSBookDataOut | never) => {
+          return reply(event)({
             type: eventOutData.type,
             payload: eventOutData.payload,
           })
-        ),
+        }),
         catchError((err, caught) => caught)
       )
     })
