@@ -26,7 +26,8 @@
     "browser-mime": "1.0.1",
     "react-photoswipe-gallery": "~1.3.6",
     "@types/photoswipe": "~4.1.1",
-    "photoswipe": "~4.1.3"
+    "photoswipe": "~4.1.3",
+    "react-virtualized": "~9.22.5"
   },
   "devDependencies": {
     "@types/he": "^1.1.1",
@@ -34,7 +35,8 @@
     "@types/styled-components": "^5.1.0",
     "@types/ws": "^7.2.5",
     "env-cmd": "~10.1.0",
-    "@types/heft-jest": "1.0.2"
+    "@types/heft-jest": "1.0.2",
+    "@types/react-virtualized": "~9.21.22"
   },
   "scripts": {
     "start": "env-cmd -f ../../.env.development.local react-scripts start",

@@ -1,9 +1,9 @@
-import React, { KeyboardEvent, ChangeEvent, useState } from 'react'
-import styled, { css, keyframes } from 'styled-components'
-import { useHistory } from 'react-router-dom'
-import {customEncodeUri} from "@sidmonta/babelelibrary/build/tools";
+import React, { KeyboardEvent, ChangeEvent, useState } from 'react';
+import styled, { css, keyframes } from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import { customEncodeUri } from '@sidmonta/babelelibrary/build/tools';
 
-type SearchBarProps = { closed: boolean; onClick?: () => void }
+type SearchBarProps = { closed: boolean; onClick?: () => void };
 
 const closeOne = keyframes`
   0% {
@@ -22,7 +22,7 @@ const closeOne = keyframes`
     height: 0px;
     transform: translate(-8px, 8px) rotate(45deg);
   }
-`
+`;
 
 const closeTwo = keyframes`
   0% {
@@ -41,7 +41,7 @@ const closeTwo = keyframes`
     height: 25px;
     transform: translate(0, 37.5px) rotate(-45deg);
   }
-`
+`;
 
 const closeOneReverse = keyframes`
   0% {
@@ -60,7 +60,7 @@ const closeOneReverse = keyframes`
     height: 25px;
     transform: translate(-25px, 12.5px) rotate(45deg);
   }
-`
+`;
 
 const closeTwoReverse = keyframes`
   0% {
@@ -79,7 +79,7 @@ const closeTwoReverse = keyframes`
     height: 25px;
     transform: translate(-25px, 12.5px) rotate(-45deg);
   }
-`
+`;
 
 const SearchContainer = styled.div`
   position: relative;
@@ -103,7 +103,7 @@ const SearchContainer = styled.div`
     width: 100%;
     padding: 0 1em;
     box-sizing: border-box;
-    background: transparent;
+    background: white;
     color: var(--main-text-color);
     border: 4px solid var(--main-text-color);
     border-radius: 50px;
@@ -115,7 +115,7 @@ const SearchContainer = styled.div`
         color: #e62878;
       `}
   }
-`
+`;
 
 const Toggle = styled.div`
   position: absolute;
@@ -144,8 +144,7 @@ const Toggle = styled.div`
   }
 
   &:before {
-    animation: ${closeOneReverse} 0.85s 1 normal
-      cubic-bezier(1, 0.01, 0.46, 1.48);
+    animation: ${closeOneReverse} 0.85s 1 normal cubic-bezier(1, 0.01, 0.46, 1.48);
     transform: translate(-25px, 12.5px) rotate(45deg);
     ${(props: SearchBarProps) =>
       props.closed &&
@@ -157,8 +156,7 @@ const Toggle = styled.div`
   }
 
   &:after {
-    animation: ${closeTwoReverse} 0.85s 1 normal
-      cubic-bezier(1, 0.01, 0.46, 1.48);
+    animation: ${closeTwoReverse} 0.85s 1 normal cubic-bezier(1, 0.01, 0.46, 1.48);
     transform: translate(-25px, 12.5px) rotate(-45deg);
 
     ${(props: SearchBarProps) =>
@@ -169,34 +167,34 @@ const Toggle = styled.div`
         transform: translate(0, 37.5px) rotate(-45deg);
       `}
   }
-`
+`;
 
 export default function SearchBar() {
-  const [closed, setClose] = useState<boolean>(true)
-  const [query, setQuery] = useState<string>('')
-  const history = useHistory()
+  const [closed, setClose] = useState<boolean>(true);
+  const [query, setQuery] = useState<string>('');
+  const history = useHistory();
 
-  let inputRef: HTMLInputElement | null = null
+  let inputRef: HTMLInputElement | null = null;
 
   const handleChange = (event: ChangeEvent) => {
-    const target: HTMLInputElement = event.target as HTMLInputElement
-    setQuery(target.value || '')
-  }
+    const target: HTMLInputElement = event.target as HTMLInputElement;
+    setQuery(target.value || '');
+  };
 
   const handleSubmit = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      history.push('/search/' + customEncodeUri(query))
-      setClose(true)
-      setQuery('')
+      history.push('/search/' + customEncodeUri(query));
+      setClose(true);
+      setQuery('');
     }
-  }
+  };
 
   const handleToggleClick = () => {
-    setClose(!closed)
+    setClose(!closed);
     if (closed) {
-      inputRef?.focus()
+      inputRef?.focus();
     }
-  }
+  };
 
   return (
     <SearchContainer className="searchBtn" closed={closed}>
@@ -206,10 +204,10 @@ export default function SearchBar() {
         onChange={handleChange}
         onKeyDown={handleSubmit}
         ref={(input: HTMLInputElement) => {
-          inputRef = input
+          inputRef = input;
         }}
       />
       <Toggle closed={closed} onClick={handleToggleClick} />
     </SearchContainer>
-  )
+  );
 }

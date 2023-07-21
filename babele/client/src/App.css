@@ -85,10 +85,9 @@ footer .searchBtn {
   height: 95vh;
   width: 65vw;
   transform: translate(-50%, -50%);
-  background-color: antiquewhite;
   box-shadow: 0px 0px 20px 0px #afafaf;
   z-index: 999;
-  padding: 16px;
+  border-radius: 5px;
 }
 
 .bg-overlay {

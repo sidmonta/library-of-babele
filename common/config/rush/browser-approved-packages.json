@@ -167,6 +167,10 @@
       "allowedCategories": [ "production" ]
     },
     {
+      "name": "react-virtualized",
+      "allowedCategories": [ "production" ]
+    },
+    {
       "name": "recoil",
       "allowedCategories": [ "production" ]
     },

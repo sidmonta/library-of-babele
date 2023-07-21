@@ -3,6 +3,7 @@ import { useWSData } from '../../../context/websocket';
 import { useGrabFavicon } from '../../../context/favicon';
 import styled from 'styled-components';
 import { InlineList } from '../../common/structure';
+import { AiOutlineLink } from 'react-icons/ai';
 
 const FaviconImg = styled.img`
   width: 30px;

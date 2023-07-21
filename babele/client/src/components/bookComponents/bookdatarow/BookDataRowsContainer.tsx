@@ -6,6 +6,7 @@ import { filter } from 'rxjs/operators';
 import { useRecoilState } from 'recoil';
 import { langSelected } from '../../../store/books';
 import styled from 'styled-components';
+import List from 'react-virtualized/dist/commonjs/List';
 
 const PaginationList = styled.div`
   position: sticky;
@@ -106,36 +107,26 @@ export default function BookDataRowsContainer(props: { data: Observable<{ quad: 
       });
   }, [lang, stream]);
 
-  const pages = () => {
-    return (
-      <PaginationList>
-        <span>Pages:</span>
-        {Array.from(Array(Math.trunc(bookRow.length / pagination.numElem) + 1).keys()).map((ind) => (
-          <span key={ind}>
-            <label>{ind}</label>
-            <input
-              onChange={() => nextPage(ind)}
-              type="radio"
-              key={ind}
-              checked={ind === pagination.page}
-              name="pages"
-            />
-          </span>
-        ))}
-      </PaginationList>
-    );
-  };
-
   return (
     <div>
-      {pages()}
-      <ul className="bookdata-list-wrapper">
-        {bookRow.slice(startPage(), endPage()).map((d, index) => (
-          <li key={index}>
-            <BookDataRow data={d} />
-          </li>
-        ))}
-      </ul>
+      <List
+        height={360}
+        rowHeight={({ index }) => {
+          const row = bookRow[index];
+          if (row.object.termType === 'Literal' && row.object.value.length > 95) {
+            return 30 * (Math.floor(row.object.value.length / 95) + 1);
+          }
+
+          return 30;
+        }}
+        rowCount={bookRow.length}
+        width={730}
+        rowRenderer={({ index, key, style }) => (
+          <div key={key} style={style}>
+            <BookDataRow data={bookRow[index]} />
+          </div>
+        )}
+      />
     </div>
   );
 }
